@@ -10,17 +10,23 @@ import { of } from 'rxjs';
 //   offset?: any;
 //   [key: string]: any;
 // }
+export interface Token {
+  access_token: string;
+  token_type: string;
+  expires_in: number;
+  refresh_token: string;
+  scope: string;
+}
 
 @Injectable({ providedIn: 'root' })
-export class spotifyServices {
+export class SpotifyServices {
   code: string | undefined;
   uri: string = environment.uri;
   baseURL: string = 'https://accounts.spotify.com/api/token';
   redirect_uri: any = `${this.uri}homepage`;
-  token: any;
-  accessToken: string = '';
-  refreshToken: string = '';
-  newTokenDatas: any;
+  token: Token | undefined;
+  accessToken: string | undefined;
+  refreshToken: string | undefined;
   newToken: string | undefined;
   errorMessage: any;
   search: string = 'https://api.spotify.com/v1/search';
@@ -62,7 +68,8 @@ export class spotifyServices {
     body += '&redirect_uri=' + `${this.uri}homepage`;
 
     this.http.post<any>(this.baseURL, body, { headers }).subscribe({
-      next: (data: any) => {
+      next: (data: Token) => {
+        console.log(data);
         this.token = data;
         this.accessToken = data.access_token;
         this.refreshToken = data.refresh_token;
@@ -84,14 +91,14 @@ export class spotifyServices {
     });
   }
 
-  checkToken() {
-    let tokenValue = localStorage.getItem('access_token');
-    if (tokenValue !== undefined && tokenValue !== '') {
-      this.tokenValue = true;
-    }
-    this.tokenValue = false;
-    return this.tokenValue;
-  }
+  // checkToken() {
+  //   let tokenValue = localStorage.getItem('access_token');
+  //   if (tokenValue !== undefined && tokenValue !== '') {
+  //     this.tokenValue = true;
+  //   }
+  //   this.tokenValue = false;
+  //   return this.tokenValue;
+  // }
 
   getFeaturedPlaylists(value: string) {
     let accessToken = localStorage.getItem('access_token');
@@ -162,8 +169,8 @@ export class spotifyServices {
       .post<any>('https://accounts.spotify.com/api/token', body, { headers })
       .subscribe({
         next: (data: any) => {
-          this.newTokenDatas = data;
-          this.newToken = this.newTokenDatas.access_token;
+          let newTokenDatas = data;
+          this.newToken = newTokenDatas.access_token;
           console.log('newToken = ', this.newToken);
 
           //   this.accessToken = data.access_token;
@@ -196,52 +203,6 @@ export class spotifyServices {
       return of([]);
     }
     return this.http.get(this.search, httpOptions);
-  }
-
-  //   createPlaylist(name:string, description:string) {
-  //          let accessToken = localStorage.getItem('access_token');
-  //         let headers = new HttpHeaders() // enlever 2eme Authorizaion sinon
-  //       .set('Content-Type', 'application/x-www-form-urlencoded')
-  //       .set('Authorization', 'playlist-modify-public')
-  //       .set('Content-Type', 'application/json')
-  //       .set("Authorization", `Bearer ${accessToken}`)
-  //       const params = new HttpParams().set('name', name).set('description', description);
-  //     // const httpOptions = {
-  //     //   headers: headers,
-  //     //   params: params
-  //     // };
-  // return this.http.post<any>(`https://api.spotify.com/v1/users/$/playlists`, params, {headers})
-
-  //   }
-  createPlaylist(name: string, description: string) {
-    let userId = 'msdsmfwvn20ggoa19elke7st1';
-    let nam = 'name1';
-    let desc2 = 'desc1';
-    let use = 'de2017d063ae4b7d87f7d52b9d8c7d31';
-    console.log('name =', name, 'description =', description);
-    let accessToken = localStorage.getItem('access_token');
-    const postData = {
-      name: nam,
-      description: desc2,
-      scope: 'playlist-modify-private'
-    };
-    const apiURL = `https://api.spotify.com/v1/users/${userId}/playlists`;
-
-    fetch(apiURL, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`
-        // 'scope' : 'playlist-modify-private'
-      },
-      body: JSON.stringify(postData)
-    })
-      .then((response) => {
-        console.log(response);
-      }) /* response.json(), console.log(response.json()) })*/
-      .then((jsonResponse) => console.log('Success: ', jsonResponse))
-      .catch((error) => console.log('Error: ', error.message));
   }
 
   getUse() {
@@ -299,6 +260,34 @@ export class spotifyServices {
       )
       .subscribe((res) => {
         console.log('ADDiTEM =', res);
+      });
+  }
+
+  createPlaylist() {
+    let accessToken = localStorage.getItem('access_token');
+    let userPlaylistId = '2gwf4f6zz8ginkw7v9v3e3tmx';
+
+    let headers = new HttpHeaders()
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${accessToken}`);
+
+    const postData = {
+      name: 'New Playlist',
+      description: 'New playlist description',
+      public: false
+    };
+
+    let body = JSON.stringify(postData);
+
+    this.http
+      .post<any>(
+        `https://api.spotify.com/v1/users/${userPlaylistId}/playlists`,
+        body,
+        { headers }
+      )
+      .subscribe((res) => {
+        console.log('created playlist =', res);
       });
   }
 }

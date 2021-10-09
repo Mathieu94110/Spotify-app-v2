@@ -1,0 +1,86 @@
+<div>
+  <div *ngIf="featPlaylists" class="cards">
+    <mat-card class="mat-elevation-z5">
+      <mat-card-title>{{ featPlaylists.message }}</mat-card-title>
+      <img
+        mat-card-image
+        src="{{ featPlaylists.image }}"
+        alt="Photo"
+        height="240px"
+      />
+      <mat-card-content>
+        <p>{{ featPlaylists.description }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          mat-raised-button
+          [disabled]="!featPlaylists.previous"
+          (click)="previousFeaturedList(featPlaylists.previous)"
+        >
+          Précédent
+        </button>
+        <button
+          mat-raised-button
+          [disabled]="!featPlaylists.next"
+          (click)="nextFeaturedList(featPlaylists.next)"
+        >
+          Suivant
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div *ngIf="allCategories" class="cards">
+    <mat-card class="mat-elevation-z5">
+      <mat-card-title>{{ allCategories.name }}</mat-card-title>
+      <img mat-card-image src="{{ allCategories.icon }}" alt="Photo" />
+      <mat-card-content>
+        <p>{{ allCategories.id }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          mat-raised-button
+          [disabled]="!allCategories.previous"
+          (click)="previousAllCategories(allCategories.previous)"
+        >
+          Précédent
+        </button>
+        <button
+          mat-raised-button
+          [disabled]="!allCategories.next"
+          (click)="nextAllCategories(allCategories.next)"
+        >
+          Suivant
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <div *ngIf="AllNewReleases" class="cards">
+    <mat-card class="mat-elevation-z5">
+      <mat-card-title>{{ AllNewReleases.name }}</mat-card-title>
+      <img mat-card-image src="{{ AllNewReleases.image }}" alt="Photo" />
+      <mat-card-content>
+        <p>{{ AllNewReleases.artist_name }}</p>
+        <p>{{ AllNewReleases.release_date }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <div class="buttons-container">
+          <button
+            mat-raised-button
+            [disabled]="!AllNewReleases.previous"
+            (click)="previousAllNewReleases(AllNewReleases.previous)"
+          >
+            Précédent
+          </button>
+          <button
+            mat-raised-button
+            [disabled]="!AllNewReleases.next"
+            (click)="nextAllNewReleases(AllNewReleases.next)"
+          >
+            Suivant
+          </button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
