@@ -1,36 +1,30 @@
 <app-sidebar></app-sidebar>
 <h1>Homepage</h1>
-<div class="cards-wrapper">
-  <mat-grid-list cols="6" rows="3">
-    <mat-grid-tile>
-      <div>
-        <h2>featured Playlists</h2>
-        <card
-          [featPlaylists]="featuredPlaylists"
-          (previousFeaturedListEvent)="getPreviousFeaturedList($event)"
-          (nextFeaturedListEvent)="getNextFeaturedList($event)"
-        ></card>
-      </div>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <div>
-        <h2>All categories</h2>
-        <card
-          [allCategories]="allCategories"
-          (previousallCategoriesEvent)="getPreviousAllCategories($event)"
-          (nextallCategoriesEvent)="getNextAllCategories($event)"
-        ></card>
-      </div>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <div>
-        <h2>Browse Categories</h2>
-        <card
-          [AllNewReleases]="AllNewReleases"
-          (previousAllNewReleasesEvent)="getPreviousAllNewReleases($event)"
-          (nextAllNewReleasesEvent)="getNextAllNewReleases($event)"
-        ></card>
-      </div>
-    </mat-grid-tile>
-  </mat-grid-list>
+<div class="cards-container">
+  <div>
+    <h2>featured Playlists</h2>
+    <card
+      [featPlaylists]="featuredPlaylists"
+      (previousFeaturedListEvent)="getPreviousFeaturedList($event)"
+      (nextFeaturedListEvent)="getNextFeaturedList($event)"
+    ></card>
+  </div>
+
+  <div>
+    <h2>All categories</h2>
+    <card
+      [allCategories]="allCategories"
+      (previousallCategoriesEvent)="getPreviousAllCategories($event)"
+      (nextallCategoriesEvent)="getNextAllCategories($event)"
+    ></card>
+  </div>
+
+  <div>
+    <h2>Browse Categories</h2>
+    <card
+      [AllNewReleases]="AllNewReleases"
+      (previousAllNewReleasesEvent)="getPreviousAllNewReleases($event)"
+      (nextAllNewReleasesEvent)="getNextAllNewReleases($event)"
+    ></card>
+  </div>
 </div>

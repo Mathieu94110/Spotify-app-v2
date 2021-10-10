@@ -1,11 +1,44 @@
-.cards {
-  width: 240px;
+.mat-card {
   height: 400px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 220px;
+  padding: 10px;
 }
 
 .example-header-image {
   background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
   background-size: cover;
+}
+
+.mat-card-image {
+  width: 100%;
+  height: auto;
+  margin: 0;
+}
+
+.mat-card > .mat-card-actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.mat-card-title {
+  height: 40px;
+  overflow: hidden;
+}
+
+mat-card-content {
+  margin: 10px;
+  overflow: hidden;
 }
 
 .mat-card-actions {
@@ -18,5 +51,20 @@
           justify-content: space-evenly;
   padding: 8px 0;
   margin: 0;
+  bottom: 0;
+}
+
+.text-and-buttons-container {
+  height: 132px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 /*# sourceMappingURL=cards.component.css.map */

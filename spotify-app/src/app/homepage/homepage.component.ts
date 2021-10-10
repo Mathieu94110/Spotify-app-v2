@@ -5,56 +5,6 @@ import { BrowseApiService } from '../services/browse-api-services';
 import { Subject } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 
-// export interface FeaturedPlaylists {
-//   message?: string;
-//   playlists: {
-//     href?: string;
-//     items: [
-//       [
-//         {
-//           collaborative?: boolean;
-//           description?: string;
-//           external_urls: {
-//             spotify?: string;
-//           };
-//           href?: string;
-//           id?: string;
-//           images: {
-//             height?: number;
-//             url?: string;
-//             width?: number;
-//           };
-//           name?: string;
-//           owner: {
-//             display_name?: string;
-//             external_urls?: {
-//               spotify?: string;
-//             };
-//             href?: string;
-//             id?: string;
-//             type?: string;
-//             uri?: string;
-//           };
-//           primary_color?: string;
-//           public?: string;
-//           snapshot_id?: string;
-//           tracks: {
-//             href?: string;
-//             total?: number;
-//           };
-//           type?: string;
-//           uri?: string;
-//         }
-//       ]
-//     ];
-//     limit?: number;
-//     next?: string;
-//     offset?: number;
-//     previous?: string;
-//     total?: number;
-//   };
-// }
-
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
@@ -105,7 +55,6 @@ export class HomepageComponent {
     this.browseApiService.getAllCategories();
     this.browseApiService.getCategoryPlaylists('party');
     this.browseApiService.getAllFeaturedPlaylists();
- 
 
     this.spotifyServices
       .getFeaturedPlaylists(this.initialFeaturedValue)
