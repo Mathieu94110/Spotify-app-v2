@@ -51,18 +51,19 @@
     max-width: 90%;
     display: flex;
     overflow-x: auto;
+    align-items: center;
   }
 }
 .mat-card {
   padding: 0 !important;
 }
 .example-card {
-  height: 100% !important;
+  height: 90% !important;
   text-align: center;
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-evenly !important;
-  width: 200px !important;
+  min-width: 200px !important;
   margin: 0 10px;
 }
 .search-header {
@@ -91,6 +92,8 @@
   margin: 0 !important;
   padding: 0;
   width: 100% !important;
+  display: flex;
+  justify-content: space-evenly;
 }
 .search-buttons-actions {
   margin: 0 !important;
@@ -113,10 +116,6 @@
   display: flex;
   justify-content: space-evenly;
 }
-
-mat-card-header,
-mat-card-content,
-mat-card-image,
-mat-card-actions {
-  min-width: 100%;
+.mat-button {
+  background-color: #7b1fa2;
 }

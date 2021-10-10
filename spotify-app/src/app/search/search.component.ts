@@ -96,14 +96,11 @@ export class SearchComponent {
         this.apiResponse = (res as any).albums;
         this.previous = (res as any).albums.previous;
         this.next = (res as any).albums.next;
-        console.log('prev and next ', this.previous, this.next);
-        console.log('apiResponse', this.apiResponse);
         this.albumsItems = (res as any).albums.items;
-        console.log('Searchres', this.albumsItems);
         this.displayingContent = true;
       },
       (err) => {
-        console.log('error', err);
+        console.error('error', err);
       }
     );
   }
@@ -114,14 +111,11 @@ export class SearchComponent {
         this.apiResponse = (res as any).albums;
         this.previous = (res as any).albums.previous;
         this.next = (res as any).albums.next;
-        console.log('prev and next ', this.previous, this.next);
-        console.log('apiResponse', this.apiResponse);
         this.albumsItems = (res as any).albums.items;
-        console.log('Searchres', this.albumsItems);
         this.displayingContent = true;
       },
       (err) => {
-        console.log('error', err);
+        console.error('error', err);
       }
     );
   }
@@ -138,26 +132,19 @@ export class SearchComponent {
       .subscribe((text: string) => {
         this.spotifyServices.searchForAnItem(text).subscribe(
           (res) => {
-            console.log('res =', res);
             this.apiResponse = res;
-            console.log('apiResponse', this.apiResponse);
             this.albumsItems = (res as any).albums.items;
             this.tracksItems = (res as any).tracks.items;
             this.artistsItems = (res as any).artists.items;
-            //  console.log(" this.artistsItems =" ,  this.artistsItems)
             this.playlistsItems = (res as any).playlists.items;
-            // console.log(" this.playlistsItems =" ,  this.playlistsItems)
             this.showsItems = (res as any).shows.items;
-            // console.log(" this.showsItems =" ,  this.showsItems)
             this.episodesItems = (res as any).episodes.items;
-            console.log(' this.episodesItems =', this.episodesItems);
             this.previous = (res as any).albums.previous;
             this.next = (res as any).albums.next;
-            //    console.log('prev and next ', this.previous , this.next);
             this.displayingContent = true;
           },
           (err) => {
-            console.log('error', err);
+            console.error('error', err);
           }
         );
       });

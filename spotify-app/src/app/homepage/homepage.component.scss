@@ -1,6 +1,15 @@
-.cards-container {
+.homepage-container {
+  background-color: #1db954;
+}
+.cards-wrapper {
   width: 100%;
   display: flex;
 
+  height: calc(100% - 64px);
   justify-content: space-evenly;
+}
+.cards {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

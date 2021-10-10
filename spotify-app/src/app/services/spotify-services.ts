@@ -3,13 +3,19 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 // interface SpotifyApiParams {
 //   limit?: any;
 //   offset?: any;
 //   [key: string]: any;
 // }
+
+interface IPlaylistObj {
+  name: string;
+  description: string;
+}
+
 export interface Token {
   access_token: string;
   token_type: string;
@@ -42,7 +48,6 @@ export class SpotifyServices {
   }
 
   login() {
-    console.log(this.clientId);
     const params = new URLSearchParams({
       client_id: this.clientId,
       redirect_uri: this.redirect_uri,
@@ -55,7 +60,6 @@ export class SpotifyServices {
   getToken(ArrayMethod: Array<string> = []) {
     this.route.queryParams.subscribe((params) => {
       this.code = params['code'];
-      console.log('this.code =' + this.code);
     });
     let encodedClientDetails = btoa(this.clientId + ':' + this.clientSecret);
 
@@ -69,7 +73,6 @@ export class SpotifyServices {
 
     this.http.post<any>(this.baseURL, body, { headers }).subscribe({
       next: (data: Token) => {
-        console.log(data);
         this.token = data;
         this.accessToken = data.access_token;
         this.refreshToken = data.refresh_token;
@@ -148,7 +151,6 @@ export class SpotifyServices {
       })
       .pipe(
         map((res) => {
-          console.log('res of getCategoryPlaylists ', res.playlists);
           return res.playlists;
         })
       );
@@ -171,7 +173,6 @@ export class SpotifyServices {
         next: (data: any) => {
           let newTokenDatas = data;
           this.newToken = newTokenDatas.access_token;
-          console.log('newToken = ', this.newToken);
 
           //   this.accessToken = data.access_token;
           //   this.refreshToken = data.refresh_token;
@@ -215,9 +216,7 @@ export class SpotifyServices {
 
     this.http
       .get<any>('https://api.spotify.com/v1/me', { headers })
-      .subscribe((res) => {
-        console.log('get Use =', res);
-      });
+      .subscribe((res) => res);
     // 'scope' : 'playlist-modify-public'
   }
 
@@ -263,7 +262,7 @@ export class SpotifyServices {
       });
   }
 
-  createPlaylist() {
+  createPlaylist(playlistName: string, playlistDescription: string): any {
     let accessToken = localStorage.getItem('access_token');
     let userPlaylistId = '2gwf4f6zz8ginkw7v9v3e3tmx';
 
@@ -273,21 +272,17 @@ export class SpotifyServices {
       .set('Authorization', `Bearer ${accessToken}`);
 
     const postData = {
-      name: 'New Playlist',
-      description: 'New playlist description',
+      name: playlistName,
+      description: playlistDescription,
       public: false
     };
 
     let body = JSON.stringify(postData);
 
-    this.http
-      .post<any>(
-        `https://api.spotify.com/v1/users/${userPlaylistId}/playlists`,
-        body,
-        { headers }
-      )
-      .subscribe((res) => {
-        console.log('created playlist =', res);
-      });
+    return this.http.post(
+      `https://api.spotify.com/v1/users/${userPlaylistId}/playlists`,
+      body,
+      { headers }
+    );
   }
 }

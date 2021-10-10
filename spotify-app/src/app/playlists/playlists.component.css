@@ -1,0 +1,109 @@
+.wrapper {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  padding: 0;
+  background-color: #1db954;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.create-playlist-button {
+  margin: 0 !important;
+}
+
+.form-wrapper {
+  width: 50%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+}
+
+.playlist-form {
+  width: 200px;
+  height: 200px;
+  background-color: #7b1fa2;
+  border-radius: 5%;
+  color: #fff;
+}
+
+.playlists {
+  width: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.playlists .example-card {
+  max-width: 250px;
+  overflow-wrap: break-word;
+}
+
+.playlists .example-header-image {
+  background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
+  background-size: cover;
+}
+
+.playlists mat-card-header {
+  display: block;
+  width: 100%;
+  height: 140px;
+  overflow-y: scroll;
+}
+
+.playlists mat-card-subtitle {
+  margin: 0 16px;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.playlists .card-item {
+  font-weight: 600;
+  color: #fff;
+}
+
+.playlists .mat-card-image {
+  height: 200px;
+  width: auto;
+  margin: 0;
+}
+
+.playlists .mat-card-actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 0;
+  margin: 0 20px;
+}
+
+.playlists .mat-button {
+  background-color: #fff;
+  color: #424242;
+}
+/*# sourceMappingURL=playlists.component.css.map */

@@ -67,7 +67,6 @@ export class HomepageComponent {
           res.playlists.previous === null ? '' : res.playlists.previous;
         this.featuredPlaylists.next =
           res.playlists.next === null ? '' : res.playlists.next;
-        console.log('this.featuredPlaylists =', typeof res.playlists.next);
       });
     this.spotifyServices
       .getAllCategories(this.initialCategoriesValue)
@@ -80,7 +79,6 @@ export class HomepageComponent {
           res.categories.previous === null ? '' : res.categories.previous;
         this.allCategories.next =
           res.categories.next === null ? '' : res.categories.next;
-        console.log('this.allCategories =', res);
       });
     this.spotifyServices
       .getAllNewReleases(this.initialNewReleaseValues)
@@ -93,7 +91,6 @@ export class HomepageComponent {
         this.AllNewReleases.image = res.albums.items[0].images[0].url;
         this.AllNewReleases.previous = res.albums.previous;
         this.AllNewReleases.next = res.albums.next;
-        console.log('AllNewReleases =', res);
       });
   }
   getPreviousFeaturedList(value: string) {

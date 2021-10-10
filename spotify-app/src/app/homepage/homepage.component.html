@@ -1,30 +1,32 @@
-<app-sidebar></app-sidebar>
-<h1>Homepage</h1>
-<div class="cards-container">
-  <div>
-    <h2>featured Playlists</h2>
-    <card
-      [featPlaylists]="featuredPlaylists"
-      (previousFeaturedListEvent)="getPreviousFeaturedList($event)"
-      (nextFeaturedListEvent)="getNextFeaturedList($event)"
-    ></card>
-  </div>
+<body class="homepage-container">
+  <app-sidebar></app-sidebar>
 
-  <div>
-    <h2>All categories</h2>
-    <card
-      [allCategories]="allCategories"
-      (previousallCategoriesEvent)="getPreviousAllCategories($event)"
-      (nextallCategoriesEvent)="getNextAllCategories($event)"
-    ></card>
-  </div>
+  <div class="cards-wrapper">
+    <div class="cards">
+      <h2>featured Playlists</h2>
+      <card
+        [featPlaylists]="featuredPlaylists"
+        (previousFeaturedListEvent)="getPreviousFeaturedList($event)"
+        (nextFeaturedListEvent)="getNextFeaturedList($event)"
+      ></card>
+    </div>
 
-  <div>
-    <h2>Browse Categories</h2>
-    <card
-      [AllNewReleases]="AllNewReleases"
-      (previousAllNewReleasesEvent)="getPreviousAllNewReleases($event)"
-      (nextAllNewReleasesEvent)="getNextAllNewReleases($event)"
-    ></card>
+    <div class="cards">
+      <h2>All categories</h2>
+      <card
+        [allCategories]="allCategories"
+        (previousallCategoriesEvent)="getPreviousAllCategories($event)"
+        (nextallCategoriesEvent)="getNextAllCategories($event)"
+      ></card>
+    </div>
+
+    <div class="cards">
+      <h2>Browse Categories</h2>
+      <card
+        [AllNewReleases]="AllNewReleases"
+        (previousAllNewReleasesEvent)="getPreviousAllNewReleases($event)"
+        (nextAllNewReleasesEvent)="getNextAllNewReleases($event)"
+      ></card>
+    </div>
   </div>
-</div>
+</body>

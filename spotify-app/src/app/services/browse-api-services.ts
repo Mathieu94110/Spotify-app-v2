@@ -31,7 +31,6 @@ export class BrowseApiService {
       )
       .pipe(
         map((res) => {
-          console.log('res of getAllFeaturedPlaylists ', res);
           return res;
         })
       );
@@ -51,7 +50,6 @@ export class BrowseApiService {
       )
       .pipe(
         map((res) => {
-          console.log('res of getAllCategories ', res.categories);
           return res.categories;
         })
       );
@@ -72,7 +70,6 @@ export class BrowseApiService {
       )
       .pipe(
         map((res) => {
-          console.log('res of getCategoryPlaylists ', res.playlists);
           return res.playlists;
         })
       );

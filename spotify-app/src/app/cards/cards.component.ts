@@ -47,9 +47,7 @@ export class CardsComponent {
     this.previousFeaturedListEvent.emit(previous);
   }
   nextFeaturedList(next: string) {
-    console.log(next);
     if (next !== null && next !== undefined && next !== '') {
-      console.log('toto');
       this.nextFeaturedListEvent.emit(next);
     }
   }
@@ -58,9 +56,7 @@ export class CardsComponent {
     this.previousallCategoriesEvent.emit(previous);
   }
   nextAllCategories(next: string) {
-    console.log(next);
     if (next !== null && next !== undefined && next !== '') {
-      console.log('toto');
       this.nextallCategoriesEvent.emit(next);
     }
   }
@@ -70,9 +66,7 @@ export class CardsComponent {
   }
 
   nextAllNewReleases(next: string) {
-    console.log(next);
     if (next !== null && next !== undefined && next !== '') {
-      console.log('toto');
       this.nextAllNewReleasesEvent.emit(next);
     }
   }
@@ -102,7 +96,7 @@ interface IItems {
   images: IImages[];
   name: string;
   owner: IOwner;
-  primary_color?: any;
+  color?: any;
   public?: any;
   snapshot_id: string;
   tracks: ITracks;

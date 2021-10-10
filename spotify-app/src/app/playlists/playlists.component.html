@@ -1,2 +1,102 @@
+<app-sidebar></app-sidebar>
+<div class="wrapper">
+  <!-- <button (click)="getUserInfo()">Get User Info</button>
 
-<button (click)="create()">Creer</button>
+  <button (click)="getPLaylists()">Get User playlists</button>
+  <button (click)="addItems()">Add item</button> -->
+  <div class="form-wrapper">
+    <div class="playlist-form">
+      <button
+        mat-button
+        class="create-playlist-button"
+        (click)="createAction()"
+      >
+        Créer une playlist
+      </button>
+      <form
+        *ngIf="create"
+        [formGroup]="playlistForm"
+        (ngSubmit)="submitPlaylist()"
+        novalidate
+      >
+        <mat-form-field class="form-fields">
+          <input matInput placeholder="Name" formControlName="name" />
+        </mat-form-field>
+        <mat-form-field class="form-fields">
+          <input
+            matInput
+            placeholder="Description"
+            formControlName="description"
+          />
+        </mat-form-field>
+        <div>
+          <button
+            mat-button
+            [disabled]="!playlistForm.valid"
+            class="create-playlist-button"
+            type="submit"
+          >
+            Valider
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="playlists">
+    <div *ngIf="returnedPlaylist">
+      <!-- <div>
+        <span>Name:</span> <span>{{ returnedPlaylist.name }}</span>
+      </div>
+      <div>
+        <span>Description:</span>
+        <span>{{ returnedPlaylist.description }}</span>
+      </div>
+      <div>
+        <span>Id:</span> <span>{{ returnedPlaylist.id }}</span>
+      </div> -->
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title
+            ><span class="card-item">Name :</span>
+            {{ returnedPlaylist.name }}</mat-card-title
+          >
+          <mat-card-subtitle
+            ><span class="card-item">Description :</span>
+            {{ returnedPlaylist.description }}</mat-card-subtitle
+          >
+          <mat-card-subtitle
+            ><span class="card-item">Id :</span>
+            {{ returnedPlaylist.id }}</mat-card-subtitle
+          >
+          <mat-card-subtitle
+            ><span class="card-item">Owner Uri :</span>
+            {{ returnedPlaylist.owner.uri }}</mat-card-subtitle
+          >
+          <mat-card-subtitle
+            ><span class="card-item">Snapshot Id :</span>
+            {{ returnedPlaylist.snapshot_id }}</mat-card-subtitle
+          >
+        </mat-card-header>
+        <img
+          mat-card-image
+          src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+          alt="Photo of a Shiba Inu"
+        />
+        <mat-card-content>
+          <p>
+            Tracks :
+            {{
+              tracksItem.length > 0
+                ? returnedPlaylist.tracks.items
+                : 'no Tracks'
+            }}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary">Add</button>
+          <button mat-raised-button color="warn">Remove</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
