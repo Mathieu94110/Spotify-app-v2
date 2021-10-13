@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SpotifyServices } from '../services/spotify-services';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ErrorMessageComponent } from './error-message';
 
 interface IReturnedPLaylist {
   name: string;
@@ -13,6 +15,7 @@ interface IReturnedPLaylist {
   tracks: {
     items: any;
   };
+  index: number;
 }
 
 @Component({
@@ -26,11 +29,14 @@ export class PlaylistsComponent implements OnInit {
   name!: string;
   description!: string;
   returnedPlaylist!: IReturnedPLaylist;
+  playlistArray: IReturnedPLaylist[] = [];
   tracksItem: string[] = [];
+  playlistIsExisting: boolean = false;
 
   constructor(
     public fb: FormBuilder,
-    private spotifyService: SpotifyServices
+    private spotifyService: SpotifyServices,
+    private snackBar: MatSnackBar
   ) {}
 
   reactiveForm() {
@@ -42,6 +48,9 @@ export class PlaylistsComponent implements OnInit {
 
   ngOnInit(): void {
     this.reactiveForm();
+    localStorage.setItem('playlists', JSON.stringify(this.returnedPlaylist));
+    console.log('HERE', this.returnedPlaylist);
+    console.log(this.playlistArray);
   }
 
   submitPlaylist(): any {
@@ -51,6 +60,7 @@ export class PlaylistsComponent implements OnInit {
         .subscribe(
           (res: any) => {
             this.returnedPlaylist = res;
+            console.log(res);
           },
           (err: Error) => {
             console.error(err);
@@ -78,4 +88,22 @@ export class PlaylistsComponent implements OnInit {
   addItems() {
     this.spotifyService.addItemToPlaylist();
   }
+  setToLocalStorage() {
+    const playlistnotExist = !this.playlistArray.some(
+      (p) => p.id === this.returnedPlaylist.id
+    );
+
+    playlistnotExist
+      ? this.playlistArray.push(this.returnedPlaylist)
+      : this.openSnackBar();
+
+    console.log(this.playlistArray);
+  }
+  openSnackBar() {
+    this.snackBar.openFromComponent(ErrorMessageComponent, {
+      duration: 2000
+    });
+  }
+
+  remove() {}
 }

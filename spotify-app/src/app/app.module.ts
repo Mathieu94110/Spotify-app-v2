@@ -24,6 +24,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CardsComponent } from './cards/cards.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     MatGridListModule,
     MatButtonModule,
     MatIconModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatSnackBarModule
   ],
   providers: [SpotifyServices],
   bootstrap: [AppComponent]

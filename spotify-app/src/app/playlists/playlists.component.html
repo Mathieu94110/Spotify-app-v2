@@ -44,16 +44,6 @@
   </div>
   <div class="playlists">
     <div *ngIf="returnedPlaylist">
-      <!-- <div>
-        <span>Name:</span> <span>{{ returnedPlaylist.name }}</span>
-      </div>
-      <div>
-        <span>Description:</span>
-        <span>{{ returnedPlaylist.description }}</span>
-      </div>
-      <div>
-        <span>Id:</span> <span>{{ returnedPlaylist.id }}</span>
-      </div> -->
       <mat-card class="example-card">
         <mat-card-header>
           <mat-card-title
@@ -93,8 +83,16 @@
           </p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button color="primary">Add</button>
-          <button mat-raised-button color="warn">Remove</button>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="setToLocalStorage()"
+          >
+            Add
+          </button>
+          <button mat-raised-button color="warn" (click)="remove()">
+            Remove
+          </button>
         </mat-card-actions>
       </mat-card>
     </div>
