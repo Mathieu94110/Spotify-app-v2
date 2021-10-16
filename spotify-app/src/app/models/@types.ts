@@ -1,4 +1,19 @@
 export namespace SpotifyApi {
+  
+  export interface IReturnedPLaylist {
+    name: string;
+    description: string;
+    id: number;
+    snapshot_id: string;
+    owner: {
+      uri: string;
+    };
+    tracks: {
+      items: any;
+    };
+    index: number;
+  }
+
   export interface PagingObject<T> {
     href: string;
     items: T[];

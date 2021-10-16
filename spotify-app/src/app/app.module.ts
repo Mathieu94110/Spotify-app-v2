@@ -5,7 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { SpotifyServices } from './services/spotify-services';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PlaylistsComponent } from './playlists/playlists.component';
+import { CreatePlaylistsComponent } from './create-playlists/create-playlists.component';
 import { SearchComponent } from './search/search.component';
 import { SongsComponent } from './songs/songs.component';
 import { NgModule } from '@angular/core';
@@ -25,17 +25,19 @@ import { MatIconModule } from '@angular/material/icon';
 import { CardsComponent } from './cards/cards.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { PlaylistsComponent } from './playlists/playlists.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
     LoginComponent,
-    PlaylistsComponent,
+    CreatePlaylistsComponent,
     SearchComponent,
     SongsComponent,
     CardsComponent,
-    SidebarComponent
+    SidebarComponent,
+    PlaylistsComponent
   ],
   imports: [
     BrowserModule,
