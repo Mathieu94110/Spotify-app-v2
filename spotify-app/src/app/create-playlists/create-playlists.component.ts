@@ -15,8 +15,8 @@ export class CreatePlaylistsComponent implements OnInit {
   playlistForm!: FormGroup;
   name!: string;
   description!: string;
-  returnedPlaylist!: SpotifyApi.IReturnedPLaylist | null;
-  playlistArray: SpotifyApi.IReturnedPLaylist[] = [];
+  returnedPlaylist!: SpotifyApi.IReturnedPLaylist;
+  // playlistArray: SpotifyApi.IReturnedPLaylist[] = [];
   tracksItem: string[] = [];
   playlistIsExisting: boolean = false;
 
@@ -35,11 +35,6 @@ export class CreatePlaylistsComponent implements OnInit {
 
   ngOnInit(): void {
     this.reactiveForm();
-    if (!localStorage.getItem('playlistArray')) {
-      localStorage.setItem('playlistArray', JSON.stringify(this.playlistArray));
-    }
-    localStorage.setItem('playlists', JSON.stringify(this.returnedPlaylist));
-    console.log('HERE', this.returnedPlaylist);
   }
 
   submitPlaylist(): any {
@@ -49,6 +44,7 @@ export class CreatePlaylistsComponent implements OnInit {
         .subscribe(
           (res: any) => {
             this.returnedPlaylist = res;
+            console.log(res);
           },
           (err: Error) => {
             console.error(err);
@@ -76,24 +72,34 @@ export class CreatePlaylistsComponent implements OnInit {
   addItems() {
     this.spotifyService.addItemToPlaylist();
   }
+
   setToLocalStorage() {
-    const playlistnotExist = !this.playlistArray.some(
+    let playlistsData: SpotifyApi.IReturnedPLaylist[] | null = JSON.parse(
+      localStorage.getItem('playlistArray') || '{}'
+    );
+    if (playlistsData == null) playlistsData = [];
+
+    localStorage.setItem('entry', JSON.stringify(this.returnedPlaylist));
+
+    const playlistnotExist = !playlistsData.some(
       (p) => p.id === this.returnedPlaylist!.id
     );
 
     playlistnotExist
-      ? this.playlistArray.push(this.returnedPlaylist!)
+      ? playlistsData.push(this.returnedPlaylist)
       : this.openSnackBar();
 
-    localStorage.setItem('playlistArray', JSON.stringify(this.playlistArray));
+    localStorage.setItem('playlistArray', JSON.stringify(playlistsData));
   }
+
   openSnackBar() {
     this.snackBar.openFromComponent(ErrorMessageComponent, {
       duration: 2000
     });
   }
 
-  remove() {
-    this.returnedPlaylist = null;
+  remove(element: any) {
+    this.returnedPlaylist = element;
+    element.remove();
   }
 }
