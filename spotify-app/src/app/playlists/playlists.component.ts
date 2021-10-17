@@ -15,7 +15,10 @@ export class PlaylistsComponent implements OnInit {
     this.playlistData = JSON.parse(
       localStorage.getItem('playlistArray') || '{}'
     );
+  }
 
-    console.log(this.playlistData);
+  deleteItem(index: number) {
+    this.playlistData = this.playlistData.filter((item) => item.id !== index);
+    localStorage.setItem('playlistArray', JSON.stringify(this.playlistData));
   }
 }

@@ -10,8 +10,10 @@
   height: 600px;
   max-height: 600px;
   display: flex;
-  justify-content: space-evenly;
   align-items: center;
+  overflow-x: scroll;
+  width: 90%;
+  margin: auto;
 }
 
 .playlist-form {
@@ -26,6 +28,7 @@
   max-width: 250px;
   height: 420px;
   overflow-wrap: break-word;
+  margin: 0 10px;
 }
 
 .example-header-image {
@@ -35,6 +38,7 @@
 
 .card-wrapper {
   display: flex;
+  width: 100%;
 }
 
 mat-card-header {
