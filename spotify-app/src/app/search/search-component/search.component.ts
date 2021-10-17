@@ -8,7 +8,7 @@ import {
 } from 'rxjs/operators';
 import { fromEvent } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { SpotifyServices } from '../services/spotify-services';
+import { SpotifyServices } from '../../services/spotify-services';
 import { FormControl } from '@angular/forms';
 
 //  export interface IAlbums{
@@ -22,6 +22,8 @@ interface IAlbums {
   release_date: string;
   release_date_precision: string;
   total_tracks: number;
+  next: string | null;
+  previous: string | null;
 }
 interface ITracks {
   artists: any;
@@ -84,6 +86,7 @@ export class SearchComponent {
   @ViewChild('movieSearchInput', { static: true })
   movieSearchInput!: ElementRef;
   album: string = 'albums';
+  isLoading: boolean = false;
 
   millisToMinutesAndSeconds(value: number): number {
     let minutes = Math.floor(value / 60000);
@@ -130,8 +133,10 @@ export class SearchComponent {
         distinctUntilChanged()
       )
       .subscribe((text: string) => {
+        this.isLoading = true;
         this.spotifyServices.searchForAnItem(text).subscribe(
           (res) => {
+            console.log(res);
             this.apiResponse = res;
             this.albumsItems = (res as any).albums.items;
             this.tracksItems = (res as any).tracks.items;
@@ -141,7 +146,9 @@ export class SearchComponent {
             this.episodesItems = (res as any).episodes.items;
             this.previous = (res as any).albums.previous;
             this.next = (res as any).albums.next;
+            this.isLoading = false;
             this.displayingContent = true;
+            console.log(this.showsItems);
           },
           (err) => {
             console.error('error', err);

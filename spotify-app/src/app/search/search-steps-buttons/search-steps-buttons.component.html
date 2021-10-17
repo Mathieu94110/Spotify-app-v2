@@ -1,0 +1,24 @@
+<div class="container">
+<span
+  ><button
+    mat-raised-button
+    color="primary"
+    class="prev_and_next_buttons"
+    [disabled]="!previous"
+    (click)="getPreviousAlbumsList(previous)"
+  >
+    Previous
+  </button></span
+><span>Albums :</span>
+<span
+  ><button
+    mat-raised-button
+    color="primary"
+    class="prev_and_next_buttons"
+    [disabled]="!next"
+    (click)="getNextAlbumsList(next)"
+  >
+    Next
+  </button></span
+>
+</div>

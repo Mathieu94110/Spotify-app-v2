@@ -1,0 +1,27 @@
+<div class="card-container">
+  <mat-card class="example-card" *ngFor="let item of tracksItems">
+    <mat-card-header class="search-header">
+      <mat-card-title class="search-titles">{{
+        item.artists[0].name
+      }}</mat-card-title>
+      <mat-card-subtitle class="search-titles">{{
+        item.name
+      }}</mat-card-subtitle>
+    </mat-card-header>
+    <img
+      mat-card-image
+      src="{{ item.album.images[0].url }}"
+      class="search-images"
+      alt="Photo of a Shiba Inu"
+    />
+    <mat-card-content class="card-content">
+      <p>Popularité : {{ item.popularity }}</p>
+      <!-- <p>Durée : {{ millisToMinutesAndSeconds(item.duration_ms) }} min</p> -->
+      <p>Numéro de piste: {{ item.track_number }}</p>
+    </mat-card-content>
+    <mat-card-actions class="search-card-actions">
+      <button mat-button class="search-buttons-actions">Lien</button>
+      <button mat-button class="search-buttons-actions">Ajouter</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
