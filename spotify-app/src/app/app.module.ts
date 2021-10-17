@@ -6,7 +6,7 @@ import { SpotifyServices } from './services/spotify-services';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CreatePlaylistsComponent } from './create-playlists/create-playlists.component';
-import { SearchComponent } from './search/search.component';
+import { SearchComponent } from './search/search-component/search.component';
 import { SongsComponent } from './songs/songs.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -25,7 +25,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { CardsComponent } from './cards/cards.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PlaylistsComponent } from './playlists/playlists.component';
+import { SearchAlbumsComponent } from './search/search-albums/search-albums.component';
+import { SearchTracksComponent } from './search/search-tracks/search-tracks.component';
+import { SearchArtistsComponent } from './search/search-artists/search-artists.component';
+import { SearchPlaylistsComponent } from './search/search-playlists/search-playlists.component';
+import { SearchEpisodesComponent } from './search/search-episodes/search-episodes.component';
+import { SearchShowsComponent } from './search/search-shows/search-shows.component';
+import { SearchStepsButtonsComponent } from './search/search-steps-buttons/search-steps-buttons.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +45,14 @@ import { PlaylistsComponent } from './playlists/playlists.component';
     SongsComponent,
     CardsComponent,
     SidebarComponent,
-    PlaylistsComponent
+    PlaylistsComponent,
+    SearchAlbumsComponent,
+    SearchTracksComponent,
+    SearchArtistsComponent,
+    SearchPlaylistsComponent,
+    SearchEpisodesComponent,
+    SearchShowsComponent,
+    SearchStepsButtonsComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +75,8 @@ import { PlaylistsComponent } from './playlists/playlists.component';
     MatButtonModule,
     MatIconModule,
     MatButtonToggleModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressSpinnerModule
   ],
   providers: [SpotifyServices],
   bootstrap: [AppComponent]

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomepageComponent } from './homepage/homepage.component';
 import { LoginComponent } from './login/login.component';
-import { SearchComponent } from './search/search.component';
+import { SearchComponent } from './search/search-component/search.component';
 import { CreatePlaylistsComponent } from './create-playlists/create-playlists.component';
 import { SongsComponent } from './songs/songs.component';
 import { PlaylistsComponent } from './playlists/playlists.component';

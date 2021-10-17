@@ -206,6 +206,20 @@ export class SpotifyServices {
     return this.http.get(this.search, httpOptions);
   }
 
+  searchOtherResult(value: string) {
+    let accessToken = localStorage.getItem('access_token');
+    let headers = new HttpHeaders()
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${accessToken}`);
+
+    return this.http.get(value, { headers }).pipe(
+      map((res) => {
+        console.log(res);
+      })
+    );
+  }
+
   getUse() {
     let accessToken = localStorage.getItem('access_token');
 
