@@ -66,15 +66,12 @@ export class SearchComponent {
   constructor(private spotifyServices: SpotifyServices) {}
   fontStyleControl = new FormControl();
   fontStyle?: string;
-  apiResponse: any = [];
   albumsItems: IAlbums[] = [];
   artistsItems: IArstists[] = [];
   playlistsItems: IPlaylists[] = [];
   tracksItems: ITracks[] = [];
   showsItems: any[] = [];
   episodesItems: IEpisodes[] = [];
-  previous: string = '';
-  next: string = '';
   tracks: boolean = true;
   playlists: boolean = true;
   artists: boolean = true;
@@ -87,41 +84,41 @@ export class SearchComponent {
   movieSearchInput!: ElementRef;
   album: string = 'albums';
   isLoading: boolean = false;
-
+  apiRes: any;
   millisToMinutesAndSeconds(value: number): number {
     let minutes = Math.floor(value / 60000);
     return minutes;
   }
-  getPreviousAlbumsList(value: string) {
-    this.spotifyServices.searchForAnItem(value).subscribe(
-      (res) => {
-        this.displayingContent = false;
-        this.apiResponse = (res as any).albums;
-        this.previous = (res as any).albums.previous;
-        this.next = (res as any).albums.next;
-        this.albumsItems = (res as any).albums.items;
-        this.displayingContent = true;
-      },
-      (err) => {
-        console.error('error', err);
-      }
-    );
-  }
-  getNextAlbumsList(value: string) {
-    this.spotifyServices.searchForAnItem(value).subscribe(
-      (res) => {
-        this.displayingContent = false;
-        this.apiResponse = (res as any).albums;
-        this.previous = (res as any).albums.previous;
-        this.next = (res as any).albums.next;
-        this.albumsItems = (res as any).albums.items;
-        this.displayingContent = true;
-      },
-      (err) => {
-        console.error('error', err);
-      }
-    );
-  }
+  // getPreviousAlbumsList(value: string) {
+  //   this.spotifyServices.searchForAnItem(value).subscribe(
+  //     (res) => {
+  //       this.displayingContent = false;
+  //       this.apiResponse = (res as any).albums;
+  //       this.previous = (res as any).albums.previous;
+  //       this.next = (res as any).albums.next;
+  //       this.albumsItems = (res as any).albums.items;
+  //       this.displayingContent = true;
+  //     },
+  //     (err) => {
+  //       console.error('error', err);
+  //     }
+  //   );
+  // }
+  // getNextAlbumsList(value: string) {
+  //   this.spotifyServices.searchForAnItem(value).subscribe(
+  //     (res) => {
+  //       this.displayingContent = false;
+  //       this.apiResponse = (res as any).albums;
+  //       this.previous = (res as any).albums.previous;
+  //       this.next = (res as any).albums.next;
+  //       this.albumsItems = (res as any).albums.items;
+  //       this.displayingContent = true;
+  //     },
+  //     (err) => {
+  //       console.error('error', err);
+  //     }
+  //   );
+  // }
   ngOnInit() {
     fromEvent(this.movieSearchInput.nativeElement, 'keyup')
       .pipe(
@@ -136,19 +133,16 @@ export class SearchComponent {
         this.isLoading = true;
         this.spotifyServices.searchForAnItem(text).subscribe(
           (res) => {
+            this.apiRes = res;
             console.log(res);
-            this.apiResponse = res;
             this.albumsItems = (res as any).albums.items;
             this.tracksItems = (res as any).tracks.items;
             this.artistsItems = (res as any).artists.items;
             this.playlistsItems = (res as any).playlists.items;
             this.showsItems = (res as any).shows.items;
             this.episodesItems = (res as any).episodes.items;
-            this.previous = (res as any).albums.previous;
-            this.next = (res as any).albums.next;
             this.isLoading = false;
             this.displayingContent = true;
-            console.log(this.showsItems);
           },
           (err) => {
             console.error('error', err);

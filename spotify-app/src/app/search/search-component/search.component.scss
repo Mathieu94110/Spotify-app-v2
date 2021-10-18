@@ -29,12 +29,13 @@
   display: block;
   justify-content: space-between;
 }
+
 .search_results_items {
   margin: 20px;
   padding: 10px;
   height: 300px;
   border: 2px solid #000;
-  justify-content: space-evenly;
+  // justify-content: space-evenly;
   display: flex;
 
   .results_items {
@@ -131,4 +132,12 @@
 .mat-progress-spinner {
   left: 50%;
   top: 20%;
+}
+.results-buttons {
+  height: 100%;
+  width: 15%;
+}
+.results-list {
+  height: 100%;
+  width: 70%;
 }

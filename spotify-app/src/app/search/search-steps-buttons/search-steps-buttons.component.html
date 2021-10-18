@@ -1,24 +1,31 @@
 <div class="container">
-<span
-  ><button
-    mat-raised-button
-    color="primary"
-    class="prev_and_next_buttons"
-    [disabled]="!previous"
-    (click)="getPreviousAlbumsList(previous)"
-  >
-    Previous
-  </button></span
-><span>Albums :</span>
-<span
-  ><button
-    mat-raised-button
-    color="primary"
-    class="prev_and_next_buttons"
-    [disabled]="!next"
-    (click)="getNextAlbumsList(next)"
-  >
-    Next
-  </button></span
->
+  <div class="search_results_items">
+    <div class="steps-buttons">
+      <span
+        ><button
+          mat-raised-button
+          color="primary"
+          class="prev_and_next_buttons"
+          [disabled]="!albumsPrevious"
+          (click)="getNextAlbumsList(this.albumsPrevious)"
+        >
+          Previous
+        </button></span
+      ><span>Albums :</span>
+      <span
+        ><button
+          mat-raised-button
+          color="primary"
+          class="prev_and_next_buttons"
+          [disabled]="!albumsNext"
+          (click)="getNextAlbumsList(this.albumsNext)"
+        >
+          Next
+        </button></span
+      >
+    </div>
+    <div class="albums-list">
+      <app-search-albums [albumsItems]="albumsItems"></app-search-albums>
+    </div>
+  </div>
 </div>

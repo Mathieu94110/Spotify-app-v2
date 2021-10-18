@@ -216,6 +216,7 @@ export class SpotifyServices {
     return this.http.get(value, { headers }).pipe(
       map((res) => {
         console.log(res);
+        return res;
       })
     );
   }

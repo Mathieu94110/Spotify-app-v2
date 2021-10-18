@@ -20,29 +20,33 @@ interface IAlbums {
   styleUrls: ['./search-steps-buttons.component.scss']
 })
 export class SearchStepsButtonsComponent implements OnInit {
+  @Input() apiRes: any;
   @Input() albumsItems: any;
-
-  @Input() previous: any;
-
-  @Input() next: any;
-
   albums: boolean = true;
   displayingContent: boolean = false;
-  apiResponse!: any;
+  albumsPrevious: string = '';
+  albumsNext: string = '';
+
   constructor(private spotifyServices: SpotifyServices) {}
 
   ngOnInit(): void {
-    console.log(this.next);
+    console.log(this.apiRes);
+    this.albumsPrevious = this.apiRes.albums.previous;
+    this.albumsNext = this.apiRes.albums.next;
+
+    console.log(this.albumsPrevious);
+    console.log(this.albumsNext);
   }
 
   getPreviousAlbumsList(value: string) {
-    this.spotifyServices.searchForAnItem(value).subscribe(
+    this.spotifyServices.searchOtherResult(value).subscribe(
       (res: any) => {
-        this.displayingContent = false;
-        this.apiResponse = res.albums;
-        this.previous = (res as any).albums.previous;
-        this.next = (res as any).albums.next;
-        // this.albumsItems = (res as any).albums.items;
+     this.albumsItems = (res as any).albums.items;
+     // this.displayingContent = false;
+     // this.apiResponse = (res as any).albums;
+     this.albumsPrevious = (res as any).albums.previous;
+     this.albumsNext = (res as any).albums.next;
+
         this.displayingContent = true;
       },
       (err) => {
@@ -53,12 +57,14 @@ export class SearchStepsButtonsComponent implements OnInit {
   getNextAlbumsList(value: string) {
     this.spotifyServices.searchOtherResult(value).subscribe(
       (res) => {
-        this.displayingContent = false;
-        this.apiResponse = (res as any).albums;
-        this.previous = (res as any).albums.previous;
-        this.next = (res as any).albums.next;
-        // this.albumsItems = (res as any).albums.items;
-        this.displayingContent = true;
+        console.log(res);
+        this.albumsItems = (res as any).albums.items;
+        // this.displayingContent = false;
+        // this.apiResponse = (res as any).albums;
+        this.albumsPrevious = (res as any).albums.previous;
+        this.albumsNext = (res as any).albums.next;
+        // // this.albumsItems = (res as any).albums.items;
+        // this.displayingContent = true;
       },
       (err) => {
         console.error('error', err);

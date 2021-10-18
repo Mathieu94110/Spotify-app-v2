@@ -1,8 +1,25 @@
 .container {
   height: 100% !important;
+  width: 100%;
   display: flex !important;
-  flex-direction: column !important;
-  justify-content: space-between !important;
+  // flex-direction: column !important;
+  // justify-content: space-between !important;
+
+  .steps-buttons {
+    height: 300px !important;
+    width: 100%;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 0.9rem;
+    align-items: center;
+  }
+  .albums-list {
+    height: 300px !important;
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    // align-items: center;
+  }
 }
 .example-form-field {
   margin-top: 60px;
@@ -27,11 +44,6 @@
   justify-content: space-between;
 }
 .search_results_items {
-  margin: 20px;
-  padding: 10px;
-  height: 300px;
-  border: 2px solid #000;
-  justify-content: space-evenly;
   display: flex;
 
   .results_items {

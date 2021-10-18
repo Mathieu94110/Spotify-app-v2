@@ -43,174 +43,147 @@
           </mat-button-toggle-group>
         </div>
       </div>
+      <div class="search_results_items">
+        <app-search-steps-buttons
+          [apiRes]="apiRes"
+          [albumsItems]="albumsItems"
+        ></app-search-steps-buttons>
+      </div>
 
-      <div *ngIf="displayingContent" class="search_results">
-        <div class="search_results_items" *ngIf="albums === true">
-          <div class="results_items">
-            <app-search-steps-buttons
-              [albumsItems]="albumsItems"
-              [previous]="previous"
-              [next]="next"
-            ></app-search-steps-buttons>
-          </div>
-          <div class="results_items_cards">
-            <app-search-albums [albumsItems]="albumsItems"></app-search-albums>
-          </div>
-        </div>
-        <div class="search_results_items" *ngIf="apiResponse">
-          <div class="results_items">
-            <span
-              ><button
-                mat-raised-button
-                color="primary"
-                class="prev_and_next_buttons"
-                [disabled]="!previous"
-                (click)="getPreviousAlbumsList(previous)"
-              >
-                Previous
-              </button></span
-            ><span>Tracks :</span>
-            <span
-              ><button
-                mat-raised-button
-                color="primary"
-                class="prev_and_next_buttons"
-                [disabled]="!next"
-                (click)="getNextAlbumsList(next)"
-              >
-                Next
-              </button></span
+      <div class="search_results_items">
+        <div class="results_buttons">
+          <span
+            ><button
+              mat-raised-button
+              color="primary"
+              class="prev_and_next_buttons"
             >
-          </div>
-          <div class="results_items_cards">
-            <app-search-tracks [tracksItems]="tracksItems"></app-search-tracks>
-          </div>
+              Previous
+            </button></span
+          ><span>Tracks :</span>
+          <span
+            ><button
+              mat-raised-button
+              color="primary"
+              class="prev_and_next_buttons"
+            >
+              Next
+            </button></span
+          >
         </div>
+        <div class="results_items_cards">
+          <app-search-tracks [tracksItems]="tracksItems"></app-search-tracks>
+        </div>
+      </div>
 
-        <div class="search_results_items" *ngIf="apiResponse">
-          <div class="results_items">
-            <span
-              ><button
-                mat-raised-button
-                color="primary"
-                class="prev_and_next_buttons"
-                [disabled]="!previous"
-                (click)="getPreviousAlbumsList(previous)"
-              >
-                Previous
-              </button></span
-            ><span>Artists :</span>
-            <span
-              ><button
-                mat-raised-button
-                color="primary"
-                class="prev_and_next_buttons"
-                [disabled]="!next"
-                (click)="getNextAlbumsList(next)"
-              >
-                Next
-              </button></span
+      <div class="search_results_items">
+        <div class="results_items">
+          <span
+            ><button
+              mat-raised-button
+              color="primary"
+              class="prev_and_next_buttons"
             >
-          </div>
-          <div class="results_items_cards">
-            <app-search-artists
-              [artistsItems]="artistsItems"
-            ></app-search-artists>
-          </div>
+              Previous
+            </button></span
+          ><span>Artists :</span>
+          <span
+            ><button
+              mat-raised-button
+              color="primary"
+              class="prev_and_next_buttons"
+            >
+              Next
+            </button></span
+          >
         </div>
-        <div class="search_results_items" *ngIf="apiResponse">
-          <div class="results_items">
-            <span
-              ><button
-                mat-raised-button
-                color="primary"
-                class="prev_and_next_buttons"
-                [disabled]="!previous"
-                (click)="getPreviousAlbumsList(previous)"
-              >
-                Previous
-              </button></span
-            ><span>Playlists :</span>
-            <span
-              ><button
-                mat-raised-button
-                color="primary"
-                class="prev_and_next_buttons"
-                [disabled]="!next"
-                (click)="getNextAlbumsList(next)"
-              >
-                Next
-              </button></span
-            >
-          </div>
-          <div class="results_items_cards">
-            <app-search-playlists
-              [playlistsItems]="playlistsItems"
-            ></app-search-playlists>
-          </div>
+        <div class="results_items_cards">
+          <app-search-artists
+            [artistsItems]="artistsItems"
+          ></app-search-artists>
         </div>
-        <div class="search_results_items" *ngIf="apiResponse">
-          <div class="results_items">
-            <span
-              ><button
-                mat-raised-button
-                color="primary"
-                class="prev_and_next_buttons"
-                [disabled]="!previous"
-                (click)="getPreviousAlbumsList(previous)"
-              >
-                Previous
-              </button></span
-            ><span>Shows :</span>
-            <span
-              ><button
-                mat-raised-button
-                color="primary"
-                class="prev_and_next_buttons"
-                [disabled]="!next"
-                (click)="getNextAlbumsList(next)"
-              >
-                Next
-              </button></span
+      </div>
+      <div class="search_results_items">
+        <div class="results_items">
+          <span
+            ><button
+              mat-raised-button
+              color="primary"
+              class="prev_and_next_buttons"
             >
-          </div>
-          <div class="results_items_cards">
-            <app-search-shows [showsItems]="showsItems"></app-search-shows>
-          </div>
+              Previous
+            </button></span
+          ><span>Playlists :</span>
+          <span
+            ><button
+              mat-raised-button
+              color="primary"
+              class="prev_and_next_buttons"
+            >
+              Next
+            </button></span
+          >
         </div>
-        <div class="search_results_items" *ngIf="apiResponse">
-          <div class="results_items">
-            <span
-              ><button
-                mat-raised-button
-                color="primary"
-                class="prev_and_next_buttons"
-                [disabled]="!previous"
-                (click)="getPreviousAlbumsList(previous)"
-              >
-                Previous
-              </button></span
-            ><span>Episodes :</span>
-            <span
-              ><button
-                mat-raised-button
-                color="primary"
-                class="prev_and_next_buttons"
-                [disabled]="!next"
-                (click)="getNextAlbumsList(next)"
-              >
-                Next
-              </button></span
+        <div class="results_items_cards">
+          <app-search-playlists
+            [playlistsItems]="playlistsItems"
+          ></app-search-playlists>
+        </div>
+      </div>
+      <div class="search_results_items">
+        <div class="results_items">
+          <span
+            ><button
+              mat-raised-button
+              color="primary"
+              class="prev_and_next_buttons"
             >
-          </div>
-          <div class="results_items_cards">
-            <app-search-episodes
-              [episodesItems]="episodesItems"
-            ></app-search-episodes>
-          </div>
+              Previous
+            </button></span
+          ><span>Shows :</span>
+          <span
+            ><button
+              mat-raised-button
+              color="primary"
+              class="prev_and_next_buttons"
+            >
+              Next
+            </button></span
+          >
+        </div>
+        <div class="results_items_cards">
+          <app-search-shows [showsItems]="showsItems"></app-search-shows>
+        </div>
+      </div>
+      <div class="search_results_items">
+        <div class="results_items">
+          <span
+            ><button
+              mat-raised-button
+              color="primary"
+              class="prev_and_next_buttons"
+            >
+              Previous
+            </button></span
+          ><span>Episodes :</span>
+          <span
+            ><button
+              mat-raised-button
+              color="primary"
+              class="prev_and_next_buttons"
+            >
+              Next
+            </button></span
+          >
+        </div>
+        <div class="results_items_cards">
+          <app-search-episodes
+            [episodesItems]="episodesItems"
+          ></app-search-episodes>
         </div>
       </div>
     </div>
+
     <ng-template [ngIf]="isLoading" class="loading-wrapper">
       <mat-spinner></mat-spinner>
     </ng-template>
