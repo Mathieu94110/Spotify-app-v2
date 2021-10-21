@@ -35,24 +35,11 @@
   padding: 10px;
   height: 300px;
   border: 2px solid #000;
-  // justify-content: space-evenly;
   display: flex;
 
-  .results_items {
-    height: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: space-between !important;
-    font-weight: 600;
-    font-size: 0.9rem;
-    text-align: center;
-  }
   .results_items_cards {
     height: 100% !important;
-
-    max-width: 90%;
     display: flex;
-    overflow-x: auto;
     align-items: center;
   }
 }
@@ -140,4 +127,7 @@
 .results-list {
   height: 100%;
   width: 70%;
+}
+.results_items_container {
+  width: 100% !important;
 }

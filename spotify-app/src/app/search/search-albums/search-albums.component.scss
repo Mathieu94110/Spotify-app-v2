@@ -1,9 +1,3 @@
-.card-container {
-  display: flex;
-  width: 100%;
-  height: 100%;
-}
-
 .results_items_cards {
   max-width: 90%;
   display: flex;
@@ -74,4 +68,7 @@ mat-card-header.mat-card-header.search-header {
 }
 .mat-button {
   background-color: #7b1fa2;
+}
+.card-container {
+  display: flex;
 }

@@ -1,143 +1,17 @@
 .container {
-  height: 100% !important;
-  width: 100%;
-  display: flex !important;
-  // flex-direction: column !important;
-  // justify-content: space-between !important;
-
-  .steps-buttons {
-    height: 300px !important;
-    width: 100%;
-    justify-content: space-between;
-    font-weight: 600;
-    font-size: 0.9rem;
-    align-items: center;
-  }
-  .albums-list {
-    height: 300px !important;
-    width: 100%;
-    display: flex;
-    overflow-x: auto;
-    // align-items: center;
-  }
-}
-.example-form-field {
-  margin-top: 60px;
-  width: 50%;
-}
-.search_container {
-  display: flex;
-  justify-content: center;
-}
-.categories_buttons {
-  display: flex;
-  justify-content: center;
-}
-.buttons_container {
-  display: flex;
-  justify-content: space-between;
-  width: 80%;
-}
-.search_results {
-  width: 100%;
-  display: block;
-  justify-content: space-between;
-}
-.search_results_items {
-  display: flex;
-
-  .results_items {
-    height: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: space-between !important;
-    font-weight: 600;
-    font-size: 0.9rem;
-    text-align: center;
-  }
-  .results_items_cards {
-    height: 100% !important;
-
-    max-width: 90%;
-    display: flex;
-    overflow-x: auto;
-    align-items: center;
-  }
-}
-.mat-card {
-  padding: 0 !important;
-}
-.example-card {
-  height: 90% !important;
-  text-align: center;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: space-evenly !important;
-  min-width: 200px !important;
-  margin: 0 10px;
-}
-.search-header {
-  display: block !important;
-  .search-titles {
-    margin: 0 !important;
-  }
-}
-.search-images {
-  height: 80px !important;
-  width: auto !important;
-  margin: 0 auto;
-}
-
-.card-content {
-  margin: 0 auto !important;
-  font-size: 10px !important;
-
-  p {
-    margin: 0 auto !important;
-    line-height: 1rem;
-  }
-}
-
-.search-card-actions {
-  margin: 0 !important;
-  padding: 0;
-  width: 100% !important;
-  display: flex;
-  justify-content: space-evenly;
-}
-.search-buttons-actions {
-  margin: 0 !important;
-}
-.example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-  background-size: cover;
-}
-.prev_and_next_buttons {
-  padding: 0 !important;
-  width: 100%;
-  line-height: 28px !important;
-}
-.description {
-  height: 50px;
-  overflow-y: scroll;
-}
-.button-toggle-group {
-  width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-}
-.mat-button {
-  background-color: #7b1fa2;
-}
-.loading-wrapper {
   height: 100%;
-  width: 100%;
+  display: flex;
+}
+
+.steps-buttons {
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
+  width: 15%;
   align-items: center;
 }
-.mat-progress-spinner {
-  left: 50%;
-  top: 20%;
+.albums-list {
+  overflow-x: auto;
+  width: 85%;
 }
