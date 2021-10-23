@@ -45,13 +45,36 @@
       </div>
       <div class="search_results_items">
         <app-search-steps-buttons
-          [apiRes]="apiRes"
-          [albumsItems]="albumsItems"
+          [Data]="albumsData"
+          [Previous]="albumsPrevious"
+          [Next]="albumsNext"
+          [ItemName]="'Albums'"
+          (newItemEvent)="addItem($event)"
+          (newNextEvent)="refreshNextButton($event)"
+          (newPreviousEvent)="refreshPrevButton($event)"
           class="results_items_container"
         ></app-search-steps-buttons>
+        <div class="results_items_cards">
+          <app-search-albums [albumsItems]="albumsItems"></app-search-albums>
+        </div>
       </div>
 
       <div class="search_results_items">
+        <app-search-steps-buttons
+          [Data]="tracksData"
+          [Previous]="tracksPrevious"
+          [Next]="tracksNext"
+          [ItemName]="'Tracks'"
+          (newItemEvent)="addItem($event)"
+          (newNextEvent)="refreshNextButton($event)"
+          (newPreviousEvent)="refreshPrevButton($event)"
+          class="results_items_container"
+        ></app-search-steps-buttons>
+        <div class="results_items_cards">
+          <app-search-tracks [tracksItems]="tracksItems"></app-search-tracks>
+        </div>
+      </div>
+      <!-- <div class="search_results_items">
         <div class="results_buttons">
           <span
             ><button
@@ -75,7 +98,7 @@
         <div class="results_items_cards">
           <app-search-tracks [tracksItems]="tracksItems"></app-search-tracks>
         </div>
-      </div>
+      </div> -->
 
       <div class="search_results_items">
         <div class="results_items">

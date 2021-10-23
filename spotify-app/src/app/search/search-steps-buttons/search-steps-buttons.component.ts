@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SpotifyServices } from 'src/app/services/spotify-services';
+import { Output, EventEmitter } from '@angular/core';
 
 interface IOtherAlbums {
   albums: IAlbums;
@@ -20,21 +21,34 @@ interface IAlbums {
   styleUrls: ['./search-steps-buttons.component.scss']
 })
 export class SearchStepsButtonsComponent implements OnInit {
-  @Input() apiRes: any;
-  @Input() albumsItems: any;
-  @Input() tracksItems: any;
+  @Input() Data: any;
+  @Input() Previous: any;
+  @Input() Next: any;
+  @Input() ItemName: any;
+
+  @Input() albumsData: any;
+  @Input() albumsPrevious: any;
+  @Input() albumsNext: any;
+
+  @Input() tracksData: any;
+  @Input() tracksPrevious: any;
+  @Input() tracksNext: any;
+
   @Input() artistsItems: any;
   @Input() playlistsItems: any;
   @Input() episodesItems: any;
   @Input() showsItems: any;
 
+  @Output() newItemEvent = new EventEmitter<{ items: object; name: string }>();
+  @Output() newPreviousEvent = new EventEmitter<any>();
+  @Output() newNextEvent = new EventEmitter<any>();
   // displayingContent: boolean = false;
   albums: boolean = true;
-  albumsPrevious: string = '';
-  albumsNext: string = '';
+  // albumsPrevious: string = '';
+  // albumsNext: string = '';
 
-  tracksPrevious: string = '';
-  tracksNext: string = '';
+  // tracksPrevious: string = '';
+  // tracksNext: string = '';
 
   artistsPrevious: string = '';
   artistsNext: string = '';
@@ -48,113 +62,88 @@ export class SearchStepsButtonsComponent implements OnInit {
   showsPrevious: string = '';
   showsNext: string = '';
 
+  albumsItems: any;
+  tracksItems: any;
   constructor(private spotifyServices: SpotifyServices) {}
 
   ngOnInit(): void {
-    console.log(this.apiRes);
-    this.albumsPrevious = this.apiRes.albums.previous;
-    this.albumsNext = this.apiRes.albums.next;
-
-    this.tracksPrevious = this.apiRes.tracks.previous;
-    this.tracksNext = this.apiRes.tracks.next;
-
-    this.artistsPrevious = this.apiRes.artists.previous;
-    this.artistsNext = this.apiRes.artists.next;
-
-    this.playlistsPrevious = this.apiRes.playlists.previous;
-    this.playlistsNext = this.apiRes.playlists.next;
-
-    this.episodesPrevious = this.apiRes.episodes.previous;
-    this.episodesNext = this.apiRes.episodes.next;
-
-    this.showsPrevious = this.apiRes.shows.previous;
-    this.showsNext = this.apiRes.shows.next;
+    if (this.Next === '') {
+      this.Next = this.Data.next;
+    }
   }
 
-  getPrevList(value: string) {
-    if (value === 'albums') {
-      value = this.albumsPrevious;
-    }
-    if (value === 'tracks') {
-      value = this.tracksPrevious;
-    }
-    if (value === 'artists') {
-      value = this.artistsPrevious;
-    }
-    if (value === 'playlists') {
-      value = this.playlistsPrevious;
-    }
-    if (value === 'episodes') {
-      value = this.episodesPrevious;
-    }
-    if (value === 'shows') {
-      value = this.showsPrevious;
-    }
-    this.spotifyServices.searchOtherResult(value).subscribe(
-      (res: any) => {
-        //albums
+  getPreviousList(value: string, itemName: string) {
+    this.spotifyServices.searchOtherResult(value).subscribe((res) => {
+      if (itemName === 'Albums') {
         this.albumsItems = (res as any).albums.items;
         this.albumsPrevious = (res as any).albums.previous;
         this.albumsNext = (res as any).albums.next;
-        //tracks
-        // this.tracksItems = (res as any).tracks.items;
-        // this.tracksPrevious = (res as any).tracks.previous;
-        // this.tracksNext = (res as any).tracks.next;
-        // //artists
-        // this.artistsItems = (res as any).artists.items;
-        // this.artistsPrevious = (res as any).artists.previous;
-        // this.artistsNext = (res as any).artists.next;
-        // //playlists
-        // this.playlistsItems = (res as any).playlists.items;
-        // this.playlistsPrevious = (res as any).playlists.previous;
-        // this.playlistsNext = (res as any).playlists.next;
-        // //episodes
-        // this.episodesItems = (res as any).episodes.items;
-        // this.episodesPrevious = (res as any).episodes.previous;
-        // this.episodesNext = (res as any).episodes.next;
-        // //shows
-        // this.showsItems = (res as any).shows.items;
-        // this.showsPrevious = (res as any).shows.previous;
-        // this.showsNext = (res as any).shows.next;
-        // this.displayingContent = true;
-      },
-      (err) => {
-        console.error('error', err);
-      }
-    );
-  }
-  getNextList(value: string) {
-    this.spotifyServices.searchOtherResult(value).subscribe(
-      (res) => {
-        console.log(res);
-        //albums
-        this.albumsItems = (res as any).albums.items;
-        this.albumsPrevious = (res as any).albums.previous;
-        this.albumsNext = (res as any).albums.next;
-        //tracks
+
+        this.addNewItem({ items: this.albumsItems, name: 'Albums' });
+        this.refreshPrevious(this.albumsPrevious);
+        this.refreshNext(this.albumsNext);
+      } else if (itemName === 'Tracks') {
         this.tracksItems = (res as any).tracks.items;
         this.tracksPrevious = (res as any).tracks.previous;
         this.tracksNext = (res as any).tracks.next;
-        //artists
-        this.artistsItems = (res as any).artists.items;
-        this.artistsPrevious = (res as any).artists.previous;
-        this.artistsNext = (res as any).artists.next;
-        //playlists
-        this.playlistsItems = (res as any).playlists.items;
-        this.playlistsPrevious = (res as any).playlists.previous;
-        this.playlistsNext = (res as any).playlists.next;
-        //episodes
-        this.episodesItems = (res as any).episodes.items;
-        this.episodesPrevious = (res as any).episodes.previous;
-        this.episodesNext = (res as any).episodes.next;
-        //shows
-        this.showsItems = (res as any).shows.items;
-        this.showsPrevious = (res as any).shows.previous;
-        this.showsNext = (res as any).shows.next;
-      },
-      (err) => {
-        console.error('error', err);
+
+        this.addNewItem({ items: this.tracksItems, name: 'Tracks' });
+        this.refreshPrevious(this.tracksPrevious);
+        this.refreshNext(this.tracksNext);
       }
+    });
+  }
+  getNextList(value: string, itemName: string) {
+    this.spotifyServices.searchOtherResult(value).subscribe(
+      (res) => {
+        if (itemName === 'Albums') {
+          this.albumsItems = (res as any).albums.items;
+          this.albumsPrevious = (res as any).albums.previous;
+          this.albumsNext = (res as any).albums.next;
+
+          this.addNewItem({ items: this.albumsItems, name: 'Albums' });
+          this.refreshPrevious({ items: this.albumsPrevious, name: 'Albums' });
+          this.refreshNext({ items: this.albumsNext, name: 'Albums' });
+        } else if (itemName === 'Tracks') {
+          this.tracksItems = (res as any).tracks.items;
+          this.tracksPrevious = (res as any).tracks.previous;
+          this.tracksNext = (res as any).tracks.next;
+
+          this.addNewItem({ items: this.tracksItems, name: 'Tracks' });
+          this.refreshPrevious({ items: this.tracksPrevious, name: 'Tracks' });
+          this.refreshNext({ items: this.tracksNext, name: 'Tracks' });
+        }
+      }
+      // //tracks
+      // this.tracksItems = (res as any).tracks.items;
+      // this.tracksPrevious = (res as any).tracks.previous;
+      // this.tracksNext = (res as any).tracks.next;
+      // //artists
+      // this.artistsItems = (res as any).artists.items;
+      // this.artistsPrevious = (res as any).artists.previous;
+      // this.artistsNext = (res as any).artists.next;
+      // //playlists
+      // this.playlistsItems = (res as any).playlists.items;
+      // this.playlistsPrevious = (res as any).playlists.previous;
+      // this.playlistsNext = (res as any).playlists.next;
+      // //episodes
+      // this.episodesItems = (res as any).episodes.items;
+      // this.episodesPrevious = (res as any).episodes.previous;
+      // this.episodesNext = (res as any).episodes.next;
+      // //shows
+      // this.showsItems = (res as any).shows.items;
+      // this.showsPrevious = (res as any).shows.previous;
+      // this.showsNext = (res as any).shows.next;
     );
+  }
+
+  addNewItem(value: { items: object; name: string }) {
+    this.newItemEvent.emit(value);
+  }
+  refreshPrevious(value: { items: object; name: string }) {
+    this.newPreviousEvent.emit(value);
+  }
+  refreshNext(value: { items: object; name: string }) {
+    this.newNextEvent.emit(value);
   }
 }

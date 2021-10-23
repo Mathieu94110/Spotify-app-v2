@@ -4,25 +4,21 @@
       ><button
         mat-raised-button
         color="primary"
-        [disabled]="!albumsPrevious"
-        (click)="getPrevList(albums)"
+        [disabled]="!Previous"
+        (click)="getPreviousList(Previous,ItemName)"
       >
         Previous
       </button></span
-    ><span>Albums :</span>
+    ><span>{{ItemName}} :</span>
     <span
       ><button
         mat-raised-button
         color="primary"
-        [disabled]="!albumsNext"
-        (click)="getNextList(albums)"
+        [disabled]="!Next"
+        (click)="getNextList(Next,ItemName)"
       >
         Next
       </button></span
     >
-  </div>
-
-  <div class="albums-list">
-    <app-search-albums [albumsItems]="albumsItems"></app-search-albums>
   </div>
 </div>

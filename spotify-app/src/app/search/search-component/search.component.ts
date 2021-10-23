@@ -67,9 +67,13 @@ export class SearchComponent {
   fontStyleControl = new FormControl();
   fontStyle?: string;
   albumsItems: IAlbums[] = [];
+  albumsPrevious: any;
+  albumsNext: any;
   artistsItems: IArstists[] = [];
   playlistsItems: IPlaylists[] = [];
   tracksItems: ITracks[] = [];
+  tracksPrevious: any;
+  tracksNext: any;
   showsItems: any[] = [];
   episodesItems: IEpisodes[] = [];
   tracks: boolean = true;
@@ -78,6 +82,8 @@ export class SearchComponent {
   episodes: boolean = true;
   shows: boolean = true;
   albums: boolean = true;
+  albumsData: any;
+  tracksData: any;
   formattedItems = [];
   displayingContent: boolean = false;
   @ViewChild('movieSearchInput', { static: true })
@@ -135,12 +141,26 @@ export class SearchComponent {
           (res) => {
             this.apiRes = res;
             console.log(res);
+            this.albumsData = (res as any).albums;
             this.albumsItems = (res as any).albums.items;
+            this.albumsPrevious = '';
+            this.albumsNext = '';
+
+            // console.log('albums', this.albumsItems);
+            this.tracksData = (res as any).tracks;
             this.tracksItems = (res as any).tracks.items;
+            this.tracksPrevious = '';
+            this.tracksNext = '';
+
+            // console.log('tracks', this.tracksItems);
             this.artistsItems = (res as any).artists.items;
+            // console.log('artists', this.artistsItems);
             this.playlistsItems = (res as any).playlists.items;
+            // console.log('playlist', this.playlistsItems);
             this.showsItems = (res as any).shows.items;
+            // console.log('shows', this.showsItems);
             this.episodesItems = (res as any).episodes.items;
+            // console.log('episodes', this.episodesItems);
             this.isLoading = false;
             this.displayingContent = true;
           },
@@ -150,6 +170,29 @@ export class SearchComponent {
         );
       });
   }
+
+  addItem(newItem: any) {
+    if (newItem.name === 'Albums') {
+      this.albumsItems = newItem.items;
+    } else if (newItem.name === 'Tracks') {
+      this.tracksItems = newItem.items;
+    }
+  }
+  refreshNextButton(value: any) {
+    if (value.name === 'Albums') {
+      this.albumsNext = value.items;
+    } else if (value.name === 'Tracks') {
+      this.tracksNext = value.items;
+    }
+  }
+  refreshPrevButton(value: any) {
+    if (value.name === 'Albums') {
+      this.albumsPrevious = value.items;
+    } else if (value.name === 'Tracks') {
+      this.albumsPrevious = value.items;
+    }
+  }
+
   displayCategorie(value: string) {
     if (value === 'tracks') {
       this.tracks = !this.tracks;
