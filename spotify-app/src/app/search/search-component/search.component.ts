@@ -67,13 +67,13 @@ export class SearchComponent {
   fontStyleControl = new FormControl();
   fontStyle?: string;
   albumsItems: IAlbums[] = [];
-  albumsPrevious: any;
-  albumsNext: any;
+  albumsPrevious?: any;
+  albumsNext?: any;
   artistsItems: IArstists[] = [];
   playlistsItems: IPlaylists[] = [];
   tracksItems: ITracks[] = [];
-  tracksPrevious: any;
-  tracksNext: any;
+  tracksPrevious?: any;
+  tracksNext?: any;
   showsItems: any[] = [];
   episodesItems: IEpisodes[] = [];
   tracks: boolean = true;
@@ -189,7 +189,7 @@ export class SearchComponent {
     if (value.name === 'Albums') {
       this.albumsPrevious = value.items;
     } else if (value.name === 'Tracks') {
-      this.albumsPrevious = value.items;
+      this.tracksPrevious = value.items;
     }
   }
 

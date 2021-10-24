@@ -21,7 +21,6 @@ interface IAlbums {
   styleUrls: ['./search-steps-buttons.component.scss']
 })
 export class SearchStepsButtonsComponent implements OnInit {
-  @Input() Data: any;
   @Input() Previous: any;
   @Input() Next: any;
   @Input() ItemName: any;
@@ -40,8 +39,11 @@ export class SearchStepsButtonsComponent implements OnInit {
   @Input() showsItems: any;
 
   @Output() newItemEvent = new EventEmitter<{ items: object; name: string }>();
-  @Output() newPreviousEvent = new EventEmitter<any>();
-  @Output() newNextEvent = new EventEmitter<any>();
+  @Output() newPreviousEvent = new EventEmitter<{
+    items: object;
+    name: string;
+  }>();
+  @Output() newNextEvent = new EventEmitter<{ items: object; name: string }>();
   // displayingContent: boolean = false;
   albums: boolean = true;
   // albumsPrevious: string = '';
@@ -67,8 +69,11 @@ export class SearchStepsButtonsComponent implements OnInit {
   constructor(private spotifyServices: SpotifyServices) {}
 
   ngOnInit(): void {
-    if (this.Next === '') {
-      this.Next = this.Data.next;
+    if (this.Next === '' && this.ItemName === 'Albums') {
+      this.Next = this.albumsData.next; // voir cette erruere
+    }
+    if (this.Next === '' && this.ItemName === 'Tracks') {
+      this.Next = this.tracksData.next; // voir cette erruere
     }
   }
 
