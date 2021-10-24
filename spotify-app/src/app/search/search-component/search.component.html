@@ -22,10 +22,7 @@
             <mat-button-toggle value="tracks" color="primary"
               >tracks</mat-button-toggle
             >
-            <mat-button-toggle
-              value="albums"
-              color="primary"
-              (click)="displayCategorie(album)"
+            <mat-button-toggle value="albums" color="primary"
               >albums</mat-button-toggle
             >
             <mat-button-toggle value="playlists" color="primary"
@@ -49,9 +46,9 @@
           [Previous]="albumsPrevious"
           [Next]="albumsNext"
           [ItemName]="'Albums'"
-          (newItemEvent)="addItem($event)"
-          (newNextEvent)="refreshNextButton($event)"
-          (newPreviousEvent)="refreshPrevButton($event)"
+          (newAlbumsItemEvent)="addAlbumsItem($event)"
+          (newAlbumsNextEvent)="refreshAlbumsNextButton($event)"
+          (newAlbumsPreviousEvent)="refreshAlbumsPrevButton($event)"
           class="results_items_container"
         ></app-search-steps-buttons>
         <div class="results_items_cards">
@@ -65,151 +62,90 @@
           [Previous]="tracksPrevious"
           [Next]="tracksNext"
           [ItemName]="'Tracks'"
-          (newItemEvent)="addItem($event)"
-          (newNextEvent)="refreshNextButton($event)"
-          (newPreviousEvent)="refreshPrevButton($event)"
+          (newTracksItemEvent)="addTracksItem($event)"
+          (newTracksNextEvent)="refreshTracksNextButton($event)"
+          (newTracksPreviousEvent)="refreshTracksPrevButton($event)"
           class="results_items_container"
         ></app-search-steps-buttons>
         <div class="results_items_cards">
           <app-search-tracks [tracksItems]="tracksItems"></app-search-tracks>
         </div>
       </div>
-      <!-- <div class="search_results_items">
-        <div class="results_buttons">
-          <span
-            ><button
-              mat-raised-button
-              color="primary"
-              class="prev_and_next_buttons"
-            >
-              Previous
-            </button></span
-          ><span>Tracks :</span>
-          <span
-            ><button
-              mat-raised-button
-              color="primary"
-              class="prev_and_next_buttons"
-            >
-              Next
-            </button></span
-          >
-        </div>
-        <div class="results_items_cards">
-          <app-search-tracks [tracksItems]="tracksItems"></app-search-tracks>
-        </div>
-      </div> -->
-
       <div class="search_results_items">
-        <div class="results_items">
-          <span
-            ><button
-              mat-raised-button
-              color="primary"
-              class="prev_and_next_buttons"
-            >
-              Previous
-            </button></span
-          ><span>Artists :</span>
-          <span
-            ><button
-              mat-raised-button
-              color="primary"
-              class="prev_and_next_buttons"
-            >
-              Next
-            </button></span
-          >
-        </div>
+        <app-search-steps-buttons
+          [artistsData]="artistsData"
+          [Previous]="artistsPrevious"
+          [Next]="artistsNext"
+          [ItemName]="'Artists'"
+          (newArtistsItemEvent)="addArtistsItem($event)"
+          (newArtistsNextEvent)="refreshArtistsNextButton($event)"
+          (newArtistsPreviousEvent)="refreshArtistsPrevButton($event)"
+          class="results_items_container"
+        ></app-search-steps-buttons>
         <div class="results_items_cards">
           <app-search-artists
             [artistsItems]="artistsItems"
           ></app-search-artists>
         </div>
       </div>
+
       <div class="search_results_items">
-        <div class="results_items">
-          <span
-            ><button
-              mat-raised-button
-              color="primary"
-              class="prev_and_next_buttons"
-            >
-              Previous
-            </button></span
-          ><span>Playlists :</span>
-          <span
-            ><button
-              mat-raised-button
-              color="primary"
-              class="prev_and_next_buttons"
-            >
-              Next
-            </button></span
-          >
-        </div>
+        <app-search-steps-buttons
+          [playlistsData]="playlistsData"
+          [Previous]="playlistsPrevious"
+          [Next]="playlistsNext"
+          [ItemName]="'Playlists'"
+          (newPlaylistsItemEvent)="addPlaylistsItem($event)"
+          (newPlaylistsNextEvent)="refreshPlaylistsNextButton($event)"
+          (newPlaylistsPreviousEvent)="refreshPlaylistsPrevButton($event)"
+          class="results_items_container"
+        ></app-search-steps-buttons>
         <div class="results_items_cards">
           <app-search-playlists
             [playlistsItems]="playlistsItems"
           ></app-search-playlists>
         </div>
       </div>
-      <div class="search_results_items">
-        <div class="results_items">
-          <span
-            ><button
-              mat-raised-button
-              color="primary"
-              class="prev_and_next_buttons"
-            >
-              Previous
-            </button></span
-          ><span>Shows :</span>
-          <span
-            ><button
-              mat-raised-button
-              color="primary"
-              class="prev_and_next_buttons"
-            >
-              Next
-            </button></span
-          >
-        </div>
+
+         <div class="search_results_items">
+        <app-search-steps-buttons
+          [showsData]="showsData"
+          [Previous]="showsPrevious"
+          [Next]="showsNext"
+          [ItemName]="'Shows'"
+          (newShowsItemEvent)="addShowsItem($event)"
+          (newShowsNextEvent)="refreshShowsNextButton($event)"
+          (newShowsPreviousEvent)="refreshShowsPrevButton($event)"
+          class="results_items_container"
+        ></app-search-steps-buttons>
         <div class="results_items_cards">
-          <app-search-shows [showsItems]="showsItems"></app-search-shows>
+          <app-search-shows
+            [showsItems]="showsItems"
+          ></app-search-shows>
         </div>
       </div>
-      <div class="search_results_items">
-        <div class="results_items">
-          <span
-            ><button
-              mat-raised-button
-              color="primary"
-              class="prev_and_next_buttons"
-            >
-              Previous
-            </button></span
-          ><span>Episodes :</span>
-          <span
-            ><button
-              mat-raised-button
-              color="primary"
-              class="prev_and_next_buttons"
-            >
-              Next
-            </button></span
-          >
-        </div>
+
+        <div class="search_results_items">
+        <app-search-steps-buttons
+          [episodesData]="episodesData"
+          [Previous]="episodesPrevious"
+          [Next]="episodesNext"
+          [ItemName]="'Episodes'"
+          (newEpisodesItemEvent)="addEpisodesItem($event)"
+          (newEpisodesNextEvent)="refreshEpisodesNextButton($event)"
+          (newEpisodesPreviousEvent)="refreshEpisodesPrevButton($event)"
+          class="results_items_container"
+        ></app-search-steps-buttons>
         <div class="results_items_cards">
           <app-search-episodes
             [episodesItems]="episodesItems"
           ></app-search-episodes>
         </div>
       </div>
-    </div>
 
-    <ng-template [ngIf]="isLoading" class="loading-wrapper">
-      <mat-spinner></mat-spinner>
-    </ng-template>
+      <ng-template [ngIf]="isLoading" class="loading-wrapper">
+        <mat-spinner></mat-spinner>
+      </ng-template>
+    </div>
   </div>
 </body>

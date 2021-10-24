@@ -1,5 +1,4 @@
 export namespace SpotifyApi {
-  
   export interface IReturnedPLaylist {
     name: string;
     description: string;
@@ -78,6 +77,68 @@ export namespace SpotifyApi {
   }
   export interface CategoryPlaylistsReponse {
     playlists: PagingObject<PlaylistObjectSimplified>;
+  }
+
+  export interface ISearchHeadings {
+    albums: IAlbums;
+    tracks: ITracks;
+    artists: IArtists;
+    playlists: IPlaylists;
+    episodes: IEpisodes;
+    shows: IShows;
+  }
+
+  export interface IAlbums {
+    artists: any;
+    name: string;
+    images: any;
+    release_date: string;
+    release_date_precision: string;
+    total_tracks: number;
+    next: string | null;
+    previous: string | null;
+  }
+  export interface ITracks {
+    artists: any;
+    name: string;
+    album: any;
+    popularity: any;
+    track_number: number;
+    next: string | null;
+    previous: string | null;
+  }
+
+  export interface IArtists {
+    name: string;
+    images: any;
+    popularity: any;
+    genres: string;
+    next: string | null;
+    previous: string | null;
+  }
+  export interface IPlaylists {
+    images: any;
+    description: string;
+    owner: any;
+    name: string;
+    next: string | null;
+    previous: string | null;
+  }
+
+  export interface IEpisodes {
+    name: string;
+    images: any;
+    description: string;
+    next: string | null;
+    previous: string | null;
+  }
+
+  export interface IShows {
+    name: string;
+    images: any;
+    description: string;
+    next: string | null;
+    previous: string | null;
   }
 }
 
