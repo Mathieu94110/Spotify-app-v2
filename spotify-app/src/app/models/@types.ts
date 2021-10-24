@@ -78,7 +78,31 @@ export namespace SpotifyApi {
   export interface CategoryPlaylistsReponse {
     playlists: PagingObject<PlaylistObjectSimplified>;
   }
+  //////////////////////////////////////////////////////////
+  export interface IfeaturedPlaylists {
+    message: string;
+    image: string;
+    description: string;
+    previous: string | null;
+    next: string | null;
+  }
 
+  export interface IAllNewReleases {
+    name: string;
+    release_date: string;
+    artist_name: string;
+    image: string;
+    previous: string | null;
+    next: string | null;
+  }
+
+  export interface IAllCategories {
+    name: string;
+    icon: string;
+    id: string;
+    previous: string | null;
+    next: string | null;
+  }
   export interface ISearchHeadings {
     albums: IAlbums;
     tracks: ITracks;

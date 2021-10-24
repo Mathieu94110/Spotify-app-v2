@@ -4,7 +4,7 @@ import { FormControl } from '@angular/forms';
 import { BrowseApiService } from '../services/browse-api-services';
 import { Subject } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
-
+import { SpotifyApi } from '../models/@types';
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
@@ -24,22 +24,11 @@ export class HomepageComponent {
     // }
   }
 
-  featuredPlaylists = {
-    message: '',
-    image: '',
-    description: '',
-    previous: '',
-    next: ''
-  };
-  allCategories = { name: '', icon: '', id: '', previous: '', next: '' };
-  AllNewReleases = {
-    name: '',
-    release_date: '',
-    artist_name: '',
-    image: '',
-    previous: '',
-    next: ''
-  };
+  featuredPlaylists: SpotifyApi.IfeaturedPlaylists =
+    {} as SpotifyApi.IfeaturedPlaylists;
+  AllNewReleases: SpotifyApi.IAllNewReleases = {} as SpotifyApi.IAllNewReleases;
+  allCategories: SpotifyApi.IAllCategories = {} as SpotifyApi.IAllCategories;
+
   searchControl = new FormControl();
   subject = new Subject<any>();
   initialFeaturedValue: string = `https://api.spotify.com/v1/browse/featured-playlists?country=FR&limit=2`;
@@ -59,7 +48,6 @@ export class HomepageComponent {
     this.spotifyServices
       .getFeaturedPlaylists(this.initialFeaturedValue)
       .subscribe((res: any) => {
-        // Object.assign(this.featuredPlaylists, res);
         this.featuredPlaylists.image = res.playlists.items[0].images[0].url;
         this.featuredPlaylists.message = res.message;
         this.featuredPlaylists.description = res.playlists.items[0].description;
@@ -71,7 +59,6 @@ export class HomepageComponent {
     this.spotifyServices
       .getAllCategories(this.initialCategoriesValue)
       .subscribe((res: any) => {
-        //  Object.assign(this.allCategories, res);
         this.allCategories.name = res.categories.items[0].name;
         this.allCategories.icon = res.categories.items[0].icons[0].url;
         this.allCategories.id = res.categories.items[0].id;
@@ -83,7 +70,6 @@ export class HomepageComponent {
     this.spotifyServices
       .getAllNewReleases(this.initialNewReleaseValues)
       .subscribe((res: any) => {
-        //Object.assign(this.AllNewReleases, res);
         this.AllNewReleases.name = res.albums.items[0].name;
         this.AllNewReleases.release_date =
           res.albums.items[0].name.release_date;
@@ -93,79 +79,83 @@ export class HomepageComponent {
         this.AllNewReleases.next = res.albums.next;
       });
   }
-  getPreviousFeaturedList(value: string) {
-    this.spotifyServices.getFeaturedPlaylists(value).subscribe((res: any) => {
-      //     Object.assign(this.featuredPlaylists, res);
-      this.featuredPlaylists.image = res.playlists.items[0].images[0].url;
-      this.featuredPlaylists.message = res.message;
-      this.featuredPlaylists.description = res.playlists.items[0].description;
-      this.featuredPlaylists.previous =
-        res.playlists.previous === null ? '' : res.playlists.previous;
-      this.featuredPlaylists.next =
-        res.playlists.next === null ? '' : res.playlists.next;
-    });
+  getPreviousFeaturedList(value: string | null) {
+    if (value !== null) {
+      this.spotifyServices.getFeaturedPlaylists(value).subscribe((res: any) => {
+        this.featuredPlaylists.image = res.playlists.items[0].images[0].url;
+        this.featuredPlaylists.message = res.message;
+        this.featuredPlaylists.description = res.playlists.items[0].description;
+        this.featuredPlaylists.previous =
+          res.playlists.previous === null ? '' : res.playlists.previous;
+        this.featuredPlaylists.next =
+          res.playlists.next === null ? '' : res.playlists.next;
+      });
+    }
   }
-  getNextFeaturedList(value: string) {
-    this.spotifyServices.getFeaturedPlaylists(value).subscribe((res: any) => {
-      //Object.assign(this.featuredPlaylists, res);
-      this.featuredPlaylists.image = res.playlists.items[0].images[0].url;
-      this.featuredPlaylists.message = res.message;
-      this.featuredPlaylists.description = res.playlists.items[0].description;
-      this.featuredPlaylists.previous =
-        res.playlists.previous === null ? '' : res.playlists.previous;
-      this.featuredPlaylists.next =
-        res.playlists.next === null ? '' : res.playlists.next;
-    });
+  getNextFeaturedList(value: string | null) {
+    if (value !== null) {
+      this.spotifyServices.getFeaturedPlaylists(value).subscribe((res: any) => {
+        this.featuredPlaylists.image = res.playlists.items[0].images[0].url;
+        this.featuredPlaylists.message = res.message;
+        this.featuredPlaylists.description = res.playlists.items[0].description;
+        this.featuredPlaylists.previous =
+          res.playlists.previous === null ? '' : res.playlists.previous;
+        this.featuredPlaylists.next =
+          res.playlists.next === null ? '' : res.playlists.next;
+      });
+    }
   }
-  getPreviousAllCategories(value: string) {
-    this.spotifyServices.getAllCategories(value).subscribe((res: any) => {
-      //    Object.assign(this.allCategories, res);
-      this.allCategories.name = res.categories.items[0].name;
-      this.allCategories.icon = res.categories.items[0].icons[0].url;
-      this.allCategories.id = res.categories.items[0].id;
-      this.allCategories.previous =
-        res.categories.previous === null ? '' : res.categories.previous;
-      this.allCategories.next =
-        res.categories.next === null ? '' : res.categories.next;
-    });
+  getPreviousAllCategories(value: string | null) {
+    if (value !== null) {
+      this.spotifyServices.getAllCategories(value).subscribe((res: any) => {
+        this.allCategories.name = res.categories.items[0].name;
+        this.allCategories.icon = res.categories.items[0].icons[0].url;
+        this.allCategories.id = res.categories.items[0].id;
+        this.allCategories.previous =
+          res.categories.previous === null ? '' : res.categories.previous;
+        this.allCategories.next =
+          res.categories.next === null ? '' : res.categories.next;
+      });
+    }
   }
-  getNextAllCategories(value: string) {
-    this.spotifyServices.getAllCategories(value).subscribe((res: any) => {
-      //  Object.assign(this.allCategories, res);
-      this.allCategories.name = res.categories.items[0].name;
-      this.allCategories.icon = res.categories.items[0].icons[0].url;
-      this.allCategories.id = res.categories.items[0].id;
-      this.allCategories.previous =
-        res.categories.previous === null ? '' : res.categories.previous;
-      this.allCategories.next =
-        res.categories.next === null ? '' : res.categories.next;
-    });
+  getNextAllCategories(value: string | null) {
+    if (value !== null) {
+      this.spotifyServices.getAllCategories(value).subscribe((res: any) => {
+        this.allCategories.name = res.categories.items[0].name;
+        this.allCategories.icon = res.categories.items[0].icons[0].url;
+        this.allCategories.id = res.categories.items[0].id;
+        this.allCategories.previous =
+          res.categories.previous === null ? '' : res.categories.previous;
+        this.allCategories.next =
+          res.categories.next === null ? '' : res.categories.next;
+      });
+    }
   }
-  getNextAllNewReleases(value: string) {
-    this.spotifyServices.getAllNewReleases(value).subscribe((res: any) => {
-      //  Object.assign(this.AllNewReleases, res);
-      this.AllNewReleases.name = res.albums.items[0].name;
-      this.AllNewReleases.release_date = res.albums.items[0].name.release_date;
-      this.AllNewReleases.artist_name = res.albums.items[0].artists[0].name;
-      this.AllNewReleases.image = res.albums.items[0].images[0].url;
-      this.AllNewReleases.previous =
-        res.albums.previous === null ? '' : res.albums.previous;
-      this.AllNewReleases.next =
-        res.albums.next === null ? '' : res.albums.next;
-    });
+  getNextAllNewReleases(value: string | null) {
+    if (value !== null) {
+      this.spotifyServices.getAllNewReleases(value).subscribe((res: any) => {
+        this.AllNewReleases.name = res.albums.items[0].name;
+        this.AllNewReleases.release_date =
+          res.albums.items[0].name.release_date;
+        this.AllNewReleases.artist_name = res.albums.items[0].artists[0].name;
+        this.AllNewReleases.image = res.albums.items[0].images[0].url;
+        this.AllNewReleases.previous = res.albums.previous;
+        this.AllNewReleases.next = res.albums.next;
+      });
+    }
   }
-  getPreviousAllNewReleases(value: string) {
-    this.spotifyServices.getAllNewReleases(value).subscribe((res: any) => {
-      // Object.assign(this.AllNewReleases, res);
-      this.AllNewReleases.name = res.albums.items[0].name;
-      this.AllNewReleases.release_date = res.albums.items[0].name.release_date;
-      this.AllNewReleases.artist_name = res.albums.items[0].artists[0].name;
-      this.AllNewReleases.image = res.albums.items[0].images[0].url;
-      this.AllNewReleases.previous =
-        res.albums.previous === null ? '' : res.albums.previous;
-      this.AllNewReleases.next =
-        res.albums.next === null ? '' : res.albums.next;
-    });
+  getPreviousAllNewReleases(value: string | null) {
+    if (value !== null) {
+      this.spotifyServices.getAllNewReleases(value).subscribe((res: any) => {
+        this.AllNewReleases.name = res.albums.items[0].name;
+        this.AllNewReleases.release_date =
+          res.albums.items[0].name.release_date;
+        this.AllNewReleases.artist_name = res.albums.items[0].artists[0].name;
+        this.AllNewReleases.image = res.albums.items[0].images[0].url;
+        this.AllNewReleases.previous = res.albums.previous;
+        this.AllNewReleases.next = res.albums.next;
+      });
+    }
   }
 }
 // handleLoginTwo() {
