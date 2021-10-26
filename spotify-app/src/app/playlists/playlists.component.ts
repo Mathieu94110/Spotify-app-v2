@@ -1,24 +1,35 @@
 import { Component, OnInit } from '@angular/core';
-import { SpotifyApi } from '../models/@types';
-import { Observable } from 'rxjs';
+import { SpotifyServices } from '../services/spotify-services';
+
 @Component({
   selector: 'app-playlists',
   templateUrl: './playlists.component.html',
   styleUrls: ['./playlists.component.scss']
 })
 export class PlaylistsComponent implements OnInit {
-  constructor() {}
+  constructor(private spotifyServices: SpotifyServices) {}
 
   tracksItem: string[] = [];
-  playlistData: SpotifyApi.IReturnedPLaylist[] = [];
-  ngOnInit(): void {
-    this.playlistData = JSON.parse(
-      localStorage.getItem('playlistArray') || '{}'
-    );
+  playlistData: any | undefined;
+
+  async ngOnInit() {
+    this.spotifyServices
+      .getUserPlaylists()
+      .subscribe(
+        (userPlaylist) => (this.playlistData = (userPlaylist as any).items)
+      );
   }
 
-  deleteItem(index: number) {
-    this.playlistData = this.playlistData.filter((item) => item.id !== index);
-    localStorage.setItem('playlistArray', JSON.stringify(this.playlistData));
+  deleteItem(id: string) {
+    this.spotifyServices.deletePlaylistItem(id).subscribe((res) => {
+      return res;
+    });
+    this.removePlaylistFromUi(id);
+  }
+
+  removePlaylistFromUi(id: string) {
+    this.playlistData = this.playlistData.filter(
+      (playlist: any) => playlist.id !== id
+    );
   }
 }

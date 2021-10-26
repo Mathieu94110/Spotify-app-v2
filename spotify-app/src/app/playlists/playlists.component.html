@@ -1,7 +1,7 @@
 <app-sidebar></app-sidebar>
 
 <div class="wrapper">
-  <div *ngIf="playlistData" class="playlists-container">
+  <div *ngIf="playlistData !== undefined" class="playlists-container">
     <div *ngFor="let playlist of playlistData" class="card-wrapper">
       <mat-card class="example-card">
         <mat-card-header>
@@ -34,19 +34,10 @@
           />
         </div>
         <mat-card-content>
-          <p>
-            Tracks :
-            {{ tracksItem.length > 0 ? playlist.tracks.items : 'no Tracks' }}
-          </p>
+          <p>Tracks:</p>
         </mat-card-content>
         <mat-card-actions>
-          <button
-            mat-raised-button
-            color="warn"
-            (click)="deleteItem(playlist.id)"
-          >
-            Remove
-          </button>
+          <button mat-raised-button color="warn" (click)="deleteItem(playlist.id)">Remove</button>
         </mat-card-actions>
       </mat-card>
     </div>

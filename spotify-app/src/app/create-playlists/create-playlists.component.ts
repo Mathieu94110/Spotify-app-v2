@@ -65,7 +65,7 @@ export class CreatePlaylistsComponent implements OnInit {
     this.spotifyService.getUse();
   }
 
-  getPLaylists() {
+  getUserPlaylists() {
     this.spotifyService.getUserPlaylists();
   }
 

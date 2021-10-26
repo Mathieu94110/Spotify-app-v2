@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
+import { SpotifyApi } from '../models/@types';
 
 // interface SpotifyApiParams {
 //   limit?: any;
@@ -243,16 +244,14 @@ export class SpotifyServices {
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${accessToken}`);
 
-    // .set(playlist-read-private)
-    let userId = 'msdsmfwvn20ggoa19elke7st1';
+    let userId = '2gwf4f6zz8ginkw7v9v3e3tmx';
 
-    this.http
-      .get<any>(`https://api.spotify.com/v1/users/${userId}/playlists`, {
+    return this.http.get(
+      `https://api.spotify.com/v1/users/${userId}/playlists`,
+      {
         headers
-      })
-      .subscribe((res) => {
-        console.log('get Playlist =', res);
-      });
+      }
+    );
   }
   addItemToPlaylist() {
     let accessToken = localStorage.getItem('access_token');
@@ -294,10 +293,41 @@ export class SpotifyServices {
 
     let body = JSON.stringify(postData);
 
-    return this.http.post(
-      `https://api.spotify.com/v1/users/${userPlaylistId}/playlists`,
-      body,
-      { headers }
-    );
+    return this.http
+      .post<any>(
+        `https://api.spotify.com/v1/users/${userPlaylistId}/playlists`,
+        body,
+        { headers }
+      )
+      .pipe(
+        map((res) => {
+          console.log(res);
+          return res;
+        })
+      );
+  }
+
+  deletePlaylistItem(id: string) {
+    //   curl --request DELETE \
+    // --url https://api.spotify.com/v1/playlists/playlist_id/tracks \
+    // --header 'Authorization: ' \
+    // --header 'Content-Type: application/json'
+    let accessToken = localStorage.getItem('access_token');
+
+    let headers = new HttpHeaders()
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${accessToken}`);
+
+    return this.http
+      .delete(`https://api.spotify.com/v1/playlists/${id}/followers`, {
+        headers
+      })
+      .pipe(
+        map((res) => {
+          console.log(res);
+          return res;
+        })
+      );
   }
 }

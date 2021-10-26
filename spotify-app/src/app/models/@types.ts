@@ -12,7 +12,9 @@ export namespace SpotifyApi {
     };
     index: number;
   }
-
+  export interface IPlayslistsItems {
+    items: IReturnedPLaylist;
+  }
   export interface PagingObject<T> {
     href: string;
     items: T[];
