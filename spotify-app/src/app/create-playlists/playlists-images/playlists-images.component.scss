@@ -10,7 +10,7 @@
   margin: 0 !important;
 }
 .form-wrapper {
-  width: calc(100% / 3);
+  width: 50%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -27,9 +27,11 @@
 }
 
 .playlists {
-  width: 100%;
+  width: 50%;
   display: flex;
-
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   .example-card {
     height: 320px;
     max-width: 250px;
@@ -80,4 +82,34 @@
     background-color: #fff;
     color: #424242;
   }
+}
+.search-images-container {
+  width: 400px;
+  height: 600px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.example-form-field {
+  width: 100%;
+}
+.search-images {
+  width: 100px;
+  height: 100px;
+}
+.image {
+  width: 80px;
+  height: 80px;
+  .image:hover {
+    cursor: pointer;
+  }
+
+  :hover {
+    cursor: pointer;
+  }
+}
+span {
+  padding: 0;
+  margin: 0;
 }

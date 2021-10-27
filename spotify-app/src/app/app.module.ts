@@ -34,6 +34,7 @@ import { SearchPlaylistsComponent } from './search/search-playlists/search-playl
 import { SearchEpisodesComponent } from './search/search-episodes/search-episodes.component';
 import { SearchShowsComponent } from './search/search-shows/search-shows.component';
 import { SearchStepsButtonsComponent } from './search/search-steps-buttons/search-steps-buttons.component';
+import { PlaylistsImagesComponent } from './create-playlists/playlists-images/playlists-images.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { SearchStepsButtonsComponent } from './search/search-steps-buttons/searc
     SearchPlaylistsComponent,
     SearchEpisodesComponent,
     SearchShowsComponent,
-    SearchStepsButtonsComponent
+    SearchStepsButtonsComponent,
+    PlaylistsImagesComponent
   ],
   imports: [
     BrowserModule,

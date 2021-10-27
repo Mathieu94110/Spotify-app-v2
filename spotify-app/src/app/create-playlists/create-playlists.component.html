@@ -43,60 +43,86 @@
     </div>
   </div>
   <div class="playlists">
-    <div *ngIf="returnedPlaylist">
-      <mat-card class="example-card">
-        <mat-card-header>
-          <mat-card-title
-            ><span class="card-item">Name :</span>
-            {{ returnedPlaylist.name }}</mat-card-title
-          >
-          <mat-card-subtitle
-            ><span class="card-item">Description :</span>
-            {{ returnedPlaylist.description }}</mat-card-subtitle
-          >
-          <mat-card-subtitle
-            ><span class="card-item">Id :</span>
-            {{ returnedPlaylist.id }}</mat-card-subtitle
-          >
-          <mat-card-subtitle
-            ><span class="card-item">Owner Uri :</span>
-            {{ returnedPlaylist.owner.uri }}</mat-card-subtitle
-          >
-          <mat-card-subtitle
-            ><span class="card-item">Snapshot Id :</span>
-            {{ returnedPlaylist.snapshot_id }}</mat-card-subtitle
-          >
-        </mat-card-header>
-        <div class="image-container">
-          <img
-            mat-card-image
-            src="../../assets/no-image-icon.png"
-            alt="Photo of a Shiba Inu"
-          />
-        </div>
-        <mat-card-content>
-          <p>
-            Tracks :
-            {{
-              tracksItem.length > 0
-                ? returnedPlaylist.tracks.items
-                : 'no Tracks'
-            }}
-          </p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button
-            mat-raised-button
-            color="primary"
-            (click)="setToLocalStorage()"
-          >
-            Add
-          </button>
-          <button mat-raised-button color="warn" (click)="remove(this)">
-            Remove
-          </button>
-        </mat-card-actions>
-      </mat-card>
+    <div style="height: 100%; width: 100%; display: flex">
+      <div
+        style="
+          width: 50%;
+          height: calc(100% - 64 px);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        "
+      >
+        <app-playlists-images [playlistId]="playlistId"
+          style="display: flex; flex-direction: column; justify-content: center"
+        ></app-playlists-images>
+      </div>
+
+      <div
+        *ngIf="returnedPlaylist"
+        style="
+          width: 50%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        "
+      >
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title
+              ><span class="card-item">Name :</span>
+              {{ returnedPlaylist.name }}</mat-card-title
+            >
+            <mat-card-subtitle
+              ><span class="card-item">Description :</span>
+              {{ returnedPlaylist.description }}</mat-card-subtitle
+            >
+            <mat-card-subtitle
+              ><span class="card-item">Id :</span>
+              {{ returnedPlaylist.id }}</mat-card-subtitle
+            >
+            <mat-card-subtitle
+              ><span class="card-item">Owner Uri :</span>
+              {{ returnedPlaylist.owner.uri }}</mat-card-subtitle
+            >
+            <mat-card-subtitle
+              ><span class="card-item">Snapshot Id :</span>
+              {{ returnedPlaylist.snapshot_id }}</mat-card-subtitle
+            >
+          </mat-card-header>
+          <div class="image-container">
+            <img
+              mat-card-image
+              src="../../assets/no-image-icon.png"
+              alt="Photo of a Shiba Inu"
+            />
+          </div>
+          <mat-card-content>
+            <p>
+              Tracks :
+              {{
+                tracksItem.length > 0
+                  ? returnedPlaylist.tracks.items
+                  : 'no Tracks'
+              }}
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="setToLocalStorage()"
+            >
+              Add
+            </button>
+            <button mat-raised-button color="warn" (click)="remove(this)">
+              Remove
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
     </div>
   </div>
 </div>

@@ -330,4 +330,38 @@ export class SpotifyServices {
         })
       );
   }
+
+  getPlaylistCoverImage(playlistId: string, imageUrl: any) {
+    let accessToken = localStorage.getItem('access_token');
+    let headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${accessToken}`);
+
+    let params = new URLSearchParams();
+    params.append('url', imageUrl);
+    params.append('height', '200px');
+    params.append('url', '200px');
+    const postData = {
+      url: imageUrl,
+      height: '200px',
+      width: '200px'
+    };
+
+    let body = JSON.stringify(postData);
+
+    return this.http
+      .get(
+        `https://api.spotify.com/v1/playlists/${playlistId}/images`,
+
+        {
+          headers
+        }
+      )
+      .pipe(
+        map((res) => {
+          console.log('getPlaylistCoverImage =', res);
+          return res;
+        })
+      );
+  }
 }

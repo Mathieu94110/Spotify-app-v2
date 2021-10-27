@@ -1,11 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { SpotifyServices } from '../services/spotify-services';
+import { ElementRef, ViewChild } from '@angular/core';
+import {
+  debounceTime,
+  map,
+  distinctUntilChanged,
+  filter,
+  catchError
+} from 'rxjs/operators';
+import { fromEvent, of } from 'rxjs';
+
+import { FormControl } from '@angular/forms';
+import { SpotifyApi } from 'src/app/models/@types';
+
+
 
 @Component({
   selector: 'app-playlists',
   templateUrl: './playlists.component.html',
   styleUrls: ['./playlists.component.scss']
 })
+  
 export class PlaylistsComponent implements OnInit {
   constructor(private spotifyServices: SpotifyServices) {}
 

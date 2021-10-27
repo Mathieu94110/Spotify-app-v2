@@ -16,6 +16,7 @@ export class CreatePlaylistsComponent implements OnInit {
   name!: string;
   description!: string;
   returnedPlaylist!: SpotifyApi.IReturnedPLaylist;
+  playlistId: string | undefined;
   // playlistArray: SpotifyApi.IReturnedPLaylist[] = [];
   tracksItem: string[] = [];
   playlistIsExisting: boolean = false;
@@ -44,6 +45,7 @@ export class CreatePlaylistsComponent implements OnInit {
         .subscribe(
           (res: any) => {
             this.returnedPlaylist = res;
+            this.playlistId = res.id;
             console.log(res);
           },
           (err: Error) => {
