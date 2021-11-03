@@ -68,7 +68,11 @@
           class="results_items_container"
         ></app-search-steps-buttons>
         <div class="results_items_cards">
-          <app-search-tracks [tracksItems]="tracksItems"></app-search-tracks>
+          <app-search-tracks
+            [tracksItems]="tracksItems"
+            (newItemEvent)="addItemId($event)"
+            (newItemUriEvent)="addItemUri($event)"
+          ></app-search-tracks>
         </div>
       </div>
       <div class="search_results_items">
@@ -107,7 +111,7 @@
         </div>
       </div>
 
-         <div class="search_results_items">
+      <div class="search_results_items">
         <app-search-steps-buttons
           [showsData]="showsData"
           [Previous]="showsPrevious"
@@ -119,13 +123,11 @@
           class="results_items_container"
         ></app-search-steps-buttons>
         <div class="results_items_cards">
-          <app-search-shows
-            [showsItems]="showsItems"
-          ></app-search-shows>
+          <app-search-shows [showsItems]="showsItems"></app-search-shows>
         </div>
       </div>
 
-        <div class="search_results_items">
+      <div class="search_results_items">
         <app-search-steps-buttons
           [episodesData]="episodesData"
           [Previous]="episodesPrevious"
@@ -139,6 +141,8 @@
         <div class="results_items_cards">
           <app-search-episodes
             [episodesItems]="episodesItems"
+            (newItemEvent)="addItemId($event)"
+            (newItemUriEvent)="addItemUri($event)"
           ></app-search-episodes>
         </div>
       </div>

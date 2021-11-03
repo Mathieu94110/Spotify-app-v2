@@ -2,8 +2,7 @@
 <div class="wrapper">
   <!-- <button (click)="getUserInfo()">Get User Info</button>
 
-  <button (click)="getPLaylists()">Get User playlists</button>
-  <button (click)="addItems()">Add item</button> -->
+  <button (click)="getPLaylists()">Get User playlists</button>-->
   <div class="form-wrapper">
     <div class="playlist-form">
       <button
@@ -53,7 +52,8 @@
           justify-content: center;
         "
       >
-        <app-playlists-images [playlistId]="playlistId"
+        <app-playlists-images
+          [playlistId]="playlistId"
           style="display: flex; flex-direction: column; justify-content: center"
         ></app-playlists-images>
       </div>

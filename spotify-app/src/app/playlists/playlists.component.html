@@ -35,9 +35,25 @@
         </div>
         <mat-card-content>
           <p>Tracks:</p>
+          <button
+            mat-button
+            color="primary"
+            [disabled]="(playlist.tracks.total | json) <= '0'"
+            (click)="
+              displayTracks(playlist.id, playlist.name, playlist.snapshot_id)
+            "
+          >
+            Titres
+          </button>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button color="warn" (click)="deleteItem(playlist.id)">Remove</button>
+          <button
+            mat-raised-button
+            color="warn"
+            (click)="deleteItem(playlist.id, playlist.tracks.href)"
+          >
+            Remove
+          </button>
         </mat-card-actions>
       </mat-card>
     </div>

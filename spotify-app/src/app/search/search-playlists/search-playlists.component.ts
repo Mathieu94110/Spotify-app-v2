@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-search-playlists',
   templateUrl: './search-playlists.component.html',
@@ -7,7 +8,10 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class SearchPlaylistsComponent implements OnInit {
   @Input() playlistsItems: any;
+
   constructor() {}
 
   ngOnInit(): void {}
+
+
 }

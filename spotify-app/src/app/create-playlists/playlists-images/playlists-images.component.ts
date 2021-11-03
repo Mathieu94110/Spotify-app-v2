@@ -39,11 +39,9 @@ export class PlaylistsImagesComponent implements OnInit {
       .subscribe((text: string) => {
         this.spotifyServices.searchForAnItem(text).subscribe(
           (res: any) => {
-            console.log(res);
             this.dataLoaded = true;
             this.albumsData = res.albums.items;
             // this.albumsUrl = res.albums.items
-            console.log(this.albumsData);
           },
           (err) => {
             console.error('error', err);

@@ -19,7 +19,13 @@ import { SpotifyApi } from 'src/app/models/@types';
 export class SearchComponent {
   constructor(private spotifyServices: SpotifyServices) {}
 
+  items: string | undefined;
+  uri: string | undefined;
+  noAddClick: boolean = true;
   fontStyleControl = new FormControl();
+
+  tracksItem: string[] = [];
+  playlistData: any | undefined;
 
   albumsData?: SpotifyApi.IAlbums;
   albumsItems?: SpotifyApi.IAlbums[];
@@ -62,6 +68,14 @@ export class SearchComponent {
     return minutes;
   }
 
+  ngAfterViewInit() {
+    this.spotifyServices
+      .getUserPlaylists()
+      .subscribe(
+        (userPlaylist) => (this.playlistData = (userPlaylist as any).items)
+      );
+  }
+
   ngOnInit() {
     fromEvent(this.movieSearchInput.nativeElement, 'keyup')
       .pipe(
@@ -78,7 +92,7 @@ export class SearchComponent {
         this.spotifyServices.searchForAnItem(text).subscribe(
           (res) => {
             this.albumsData = (res as any).albums;
-            console.log(this.albumsData);
+
             this.albumsItems = (res as any).albums.items;
             this.albumsPrevious = '';
             this.albumsNext = '';
@@ -94,6 +108,7 @@ export class SearchComponent {
             this.artistsNext = '';
 
             this.playlistsData = (res as any).playlists;
+
             this.playlistsItems = (res as any).playlists.items;
             this.playlistsPrevious = '';
             this.playlistsNext = '';
@@ -176,5 +191,13 @@ export class SearchComponent {
   }
   refreshEpisodesPrevButton(value: string) {
     this.episodesPrevious = value;
+  }
+
+  addItemId(id: string) {
+    this.items = id;
+    this.noAddClick = !this.noAddClick;
+  }
+  addItemUri(uri: string) {
+    this.uri = uri;
   }
 }

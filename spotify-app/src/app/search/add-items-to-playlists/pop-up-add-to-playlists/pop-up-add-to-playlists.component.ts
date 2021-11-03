@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 export class PopUpAddToPlaylistsComponent implements OnInit {
   isPlaylistData: boolean = false;
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { id: string, uri:string },
+    @Inject(MAT_DIALOG_DATA) public data: { id: string; uri: string },
     private spotifyServices: SpotifyServices
   ) {}
   activeState = '';
@@ -33,7 +33,15 @@ export class PopUpAddToPlaylistsComponent implements OnInit {
     this.playlistIdSelected = playlistId;
   }
   addItem() {
-    console.log(this.playlistIdSelected ,);
-    this.spotifyServices.addItemToPlaylist(this.playlistIdSelected, this.data.uri);
+    console.log(
+      'playlistIdSelected =',
+      this.playlistIdSelected,
+      'uri =',
+      this.data.uri
+    );
+    this.spotifyServices.addItemToPlaylist(
+      this.playlistIdSelected,
+      this.data.uri
+    );
   }
 }

@@ -22,6 +22,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDialogModule } from '@angular/material/dialog';
 import { CardsComponent } from './cards/cards.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -35,6 +37,9 @@ import { SearchEpisodesComponent } from './search/search-episodes/search-episode
 import { SearchShowsComponent } from './search/search-shows/search-shows.component';
 import { SearchStepsButtonsComponent } from './search/search-steps-buttons/search-steps-buttons.component';
 import { PlaylistsImagesComponent } from './create-playlists/playlists-images/playlists-images.component';
+import { AddItemsToPlaylistsComponent } from './search/add-items-to-playlists/add-items-to-playlists.component';
+import { PopUpAddToPlaylistsComponent } from './search/add-items-to-playlists/pop-up-add-to-playlists/pop-up-add-to-playlists.component';
+import { PlaylistTracksModalComponent } from './playlists/playlist-tracks-modal/playlist-tracks-modal.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +59,10 @@ import { PlaylistsImagesComponent } from './create-playlists/playlists-images/pl
     SearchEpisodesComponent,
     SearchShowsComponent,
     SearchStepsButtonsComponent,
-    PlaylistsImagesComponent
+    PlaylistsImagesComponent,
+    AddItemsToPlaylistsComponent,
+    PopUpAddToPlaylistsComponent,
+    PlaylistTracksModalComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +86,9 @@ import { PlaylistsImagesComponent } from './create-playlists/playlists-images/pl
     MatIconModule,
     MatButtonToggleModule,
     MatSnackBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatExpansionModule,
+    MatDialogModule
   ],
   providers: [SpotifyServices],
   bootstrap: [AppComponent]

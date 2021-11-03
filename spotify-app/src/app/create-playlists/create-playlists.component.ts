@@ -46,7 +46,6 @@ export class CreatePlaylistsComponent implements OnInit {
           (res: any) => {
             this.returnedPlaylist = res;
             this.playlistId = res.id;
-            console.log(res);
           },
           (err: Error) => {
             console.error(err);
@@ -69,10 +68,6 @@ export class CreatePlaylistsComponent implements OnInit {
 
   getUserPlaylists() {
     this.spotifyService.getUserPlaylists();
-  }
-
-  addItems() {
-    this.spotifyService.addItemToPlaylist();
   }
 
   setToLocalStorage() {

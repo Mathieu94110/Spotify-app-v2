@@ -11,7 +11,7 @@
   max-height: 600px;
   display: flex;
   align-items: center;
-overflow-x: auto;
+  overflow-x: auto;
 
   width: 90%;
   margin: auto;
@@ -76,4 +76,8 @@ mat-card-subtitle {
 .mat-button {
   background-color: #fff;
   color: #424242;
+}
+.mat-button.mat-primary {
+  background-color: #7b1fa2;
+  color: #fff;
 }

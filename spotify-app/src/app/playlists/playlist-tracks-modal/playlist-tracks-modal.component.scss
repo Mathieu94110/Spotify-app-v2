@@ -1,0 +1,36 @@
+.playlist-tracks-modal-container {
+  width: 600px;
+
+  .playlist-tracks-header {
+    display: flex;
+    align-items: center;
+    width: 60%;
+    margin: 0 20%;
+    font-weight: 600;
+    height: 60px;
+
+    .tracks-header {
+      width: 25%;
+      text-align: 'center';
+    }
+  }
+
+  .tracks-items {
+    width: 15%;
+    text-align: center;
+  }
+  .tracks-logo {
+    width: 20%;
+    text-align: center;
+  }
+  .playlist-tracks-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+}
+
+h2 {
+  text-align: center;
+  color: gold;
+}
