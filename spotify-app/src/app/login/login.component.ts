@@ -24,13 +24,13 @@ export class LoginComponent implements OnInit {
   ngOnInit() {}
 
   started() {
-    this.spotifyService.login();
-    // this.spotifyService.getToken();
-    // this.authenticationService;
-    /*      .requestDataFromMultipleSources()
-      .subscribe((responseList: any) => {
-        this.responseData1 = responseList[0];
-        this.responseData2 = responseList[1];
-      }); */
+    // this.spotifyService.login();
+    //  this.spotifyService.getToken();
+this.authenticationService
+   .requestDataFromMultipleSources()
+  .subscribe((responseList: any) => {
+    this.responseData1 = responseList[0];
+  this.responseData2 = responseList[1];
+  }); 
   }
 }

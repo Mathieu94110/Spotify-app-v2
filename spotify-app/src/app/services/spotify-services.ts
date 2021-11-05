@@ -59,13 +59,13 @@ export class SpotifyServices {
     window.location = <any>`${this.authorizeUri}?${params.toString()}`;
   }
 
-  getToken(ArrayMethod: Array<string> = []) {
+  getToken() {
     this.route.queryParams.subscribe((params) => {
       this.code = params['code'];
     });
     const encodedClientDetails = btoa(this.clientId + ':' + this.clientSecret);
 
-    const headers = new HttpHeaders() // enlever 2eme Authorizaion sinon
+    const headers = new HttpHeaders() 
       .set('Content-Type', 'application/x-www-form-urlencoded')
       .set('Authorization', 'Basic ' + encodedClientDetails);
 
@@ -80,14 +80,7 @@ export class SpotifyServices {
         this.refreshToken = data.refresh_token;
         localStorage.setItem('access_token', this.accessToken);
         localStorage.setItem('refresh_token', this.refreshToken);
-        // if (ArrayMethod.length > 0) {
-        //   if (ArrayMethod.includes('getFeaturedPlaylists')) {
-        //     this.getFeaturedPlaylists();
-        //   }
-        //   if (ArrayMethod.includes('getAllCategories')) {
-        //     this.getAllCategories();
-        //   }
-        // }
+
       },
       error: (error: Error) => {
         this.errorMessage = error.message;
