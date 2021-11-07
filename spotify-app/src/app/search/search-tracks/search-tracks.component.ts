@@ -15,7 +15,7 @@ export class SearchTracksComponent implements OnInit {
   @Output() newItemEvent = new EventEmitter<string>();
 
   @Output() newItemUriEvent = new EventEmitter<string>();
-  
+
   addNewItemId(id: string) {
     this.newItemEvent.emit(id);
   }

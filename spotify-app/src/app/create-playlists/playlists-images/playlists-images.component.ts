@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { fromEvent, Observable, of } from 'rxjs';
+import { fromEvent, of } from 'rxjs';
 import {
   catchError,
   debounceTime,
@@ -9,6 +9,7 @@ import {
 } from 'rxjs/operators';
 import { SpotifyApi } from 'src/app/models/@types';
 import { SpotifyServices } from 'src/app/services/spotify-services';
+
 
 @Component({
   selector: 'app-playlists-images',
@@ -23,7 +24,7 @@ export class PlaylistsImagesComponent implements OnInit {
 
   @ViewChild('playlistImageSearchInput', { static: true })
   playlistImageSearchInput!: ElementRef;
-  albumsData?: any[] = [];
+  albumsData?: SpotifyApi.IAlbums[] = [];
 
   ngOnInit() {
     fromEvent(this.playlistImageSearchInput.nativeElement, 'keyup')
@@ -42,7 +43,6 @@ export class PlaylistsImagesComponent implements OnInit {
             this.dataLoaded = true;
             this.albumsData = res.albums.items;
             console.log(this.albumsData);
-            // this.albumsUrl = res.albums.items
           },
           (err) => {
             console.error('error', err);
@@ -52,7 +52,7 @@ export class PlaylistsImagesComponent implements OnInit {
   }
 
   getPlaylistCoverImage(playlistId: string, url: string) {
-    // console.log(this.albumsData);
+    console.log(this.albumsData);
     this.spotifyServices
       .getPlaylistCoverImage(playlistId, url)
       .subscribe((res) => {

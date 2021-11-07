@@ -1,8 +1,16 @@
 export namespace SpotifyApi {
+  export interface IToken {
+    access_token: string;
+    token_type: string;
+    expires_in: number;
+    refresh_token: string;
+    scope: string;
+  }
+
   export interface IReturnedPLaylist {
     name: string;
     description: string;
-    id: number;
+    id: string;
     snapshot_id: string;
     owner: {
       uri: string;
@@ -63,6 +71,12 @@ export namespace SpotifyApi {
       href: string;
       total: number;
     };
+  }
+
+  export interface SpotifyApiParams {
+    limit?: any;
+    offset?: any;
+    [key: string]: any;
   }
   export interface ListOfFeaturedPlaylistsResponse {
     message?: string;

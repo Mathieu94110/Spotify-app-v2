@@ -4,23 +4,15 @@ import { map } from 'rxjs/operators';
 import { SpotifyApi } from 'src/app/models/@types';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
 
-interface SpotifyApiParams {
-  limit?: any;
-  offset?: any;
-  [key: string]: any;
-}
 @Injectable({ providedIn: 'root' })
 export class BrowseApiService {
-  browseUrl: string;
+  browseUrl = 'https://api.spotify.com/v1/browse';
+
   access_token: null | string = localStorage.getItem('access_token');
-  constructor(private http: HttpClient) {
-    this.browseUrl = 'https://api.spotify.com/v1/browse';
-  }
-  headerDict = {
-    Authorization: this.access_token
-  };
+  constructor(private http: HttpClient) {}
+
   getAllFeaturedPlaylists() {
-    let headers = new HttpHeaders() // enlever 2eme Authorizaion sinon
+    let headers = new HttpHeaders()
       .set('Content-Type', 'application/x-www-form-urlencoded')
       .set('Authorization', 'Basic ' + this.access_token);
 
@@ -37,7 +29,7 @@ export class BrowseApiService {
   }
 
   getAllCategories(
-    params: SpotifyApiParams = {
+    params: SpotifyApi.SpotifyApiParams = {
       limit: 50
     }
   ) {
@@ -57,7 +49,7 @@ export class BrowseApiService {
 
   getCategoryPlaylists(
     categoryId: string,
-    params: SpotifyApiParams = {
+    params: SpotifyApi.SpotifyApiParams = {
       limit: 50
     }
   ) {

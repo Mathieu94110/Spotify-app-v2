@@ -33,11 +33,9 @@ export class HomepageComponent {
     {} as SpotifyApi.IFavouritesArtists;
 
   searchControl = new FormControl();
-  subject = new Subject<any>();
   initialFeaturedValue: string = `https://api.spotify.com/v1/browse/featured-playlists?country=FR&limit=2`;
   initialCategoriesValue: string = `https://api.spotify.com/v1/browse/categories?country=FR&limit=2`;
   initialNewReleaseValues: string = `https://api.spotify.com/v1/browse/new-releases?country=FR&limit=2`;
-  // stateUser: boolean;
 
   ngOnInit() {
     this.spotifyServices.getToken();
@@ -170,20 +168,3 @@ export class HomepageComponent {
     }
   }
 }
-// handleLoginTwo() {
-//   this.spotifyServices.getrefreshToken();
-//  }
-
-// Create after InitialGetToken()
-//let decodedToken = localStorage.getItem('access_token');
-// if (decodedToken.exp < new Date().getTime() / 1000) {
-//   console.log('EXPIRED');
-//   call getToken("refresh_token")
-// }
-// let date = new Date();
-// // date.getTime() is in milliseconds and thus we've got to divide by 1000
-// if (decodedToken.exp < date.getTime() / 1000) {
-//   console.log('The token has expired');
-// } else {
-//   console.log('The token is still valid');
-// }
