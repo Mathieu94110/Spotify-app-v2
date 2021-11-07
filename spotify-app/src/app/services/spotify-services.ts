@@ -65,7 +65,7 @@ export class SpotifyServices {
     });
     const encodedClientDetails = btoa(this.clientId + ':' + this.clientSecret);
 
-    const headers = new HttpHeaders() 
+    const headers = new HttpHeaders()
       .set('Content-Type', 'application/x-www-form-urlencoded')
       .set('Authorization', 'Basic ' + encodedClientDetails);
 
@@ -80,7 +80,6 @@ export class SpotifyServices {
         this.refreshToken = data.refresh_token;
         localStorage.setItem('access_token', this.accessToken);
         localStorage.setItem('refresh_token', this.refreshToken);
-
       },
       error: (error: Error) => {
         this.errorMessage = error.message;
@@ -378,28 +377,21 @@ export class SpotifyServices {
       );
   }
 
-  getPlaylistCoverImage(playlistId: string, imageUrl: any) {
+  getPlaylistCoverImage(playlistId: string, url: string) {
     const accessToken = localStorage.getItem('access_token');
     const headers = new HttpHeaders()
+      .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${accessToken}`);
 
-    const params = new URLSearchParams();
-    params.append('url', imageUrl);
-    params.append('height', '200px');
-    params.append('url', '200px');
-    const postData = {
-      url: imageUrl,
-      height: '200px',
-      width: '200px'
-    };
-
-    const body = JSON.stringify(postData);
+    const postData = btoa(url);
+    console.log(postData);
+    // const body = JSON.stringify(postData);
 
     return this.http
-      .get(
+      .put(
         `https://api.spotify.com/v1/playlists/${playlistId}/images`,
-
+        postData,
         {
           headers
         }
@@ -410,5 +402,21 @@ export class SpotifyServices {
           return res;
         })
       );
+  }
+
+  getUserFavouriteArtists() {
+    const accessToken = localStorage.getItem('access_token');
+
+    const headers = new HttpHeaders()
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${accessToken}`);
+
+    return this.http.get(
+      `https://api.spotify.com/v1/me/following?type=artist`,
+      {
+        headers
+      }
+    );
   }
 }

@@ -5,6 +5,7 @@ import { BrowseApiService } from '../services/browse-api-services';
 import { Subject } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SpotifyApi } from '../models/@types';
+import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
@@ -28,6 +29,8 @@ export class HomepageComponent {
     {} as SpotifyApi.IfeaturedPlaylists;
   AllNewReleases: SpotifyApi.IAllNewReleases = {} as SpotifyApi.IAllNewReleases;
   allCategories: SpotifyApi.IAllCategories = {} as SpotifyApi.IAllCategories;
+  favouritesArtists: SpotifyApi.IFavouritesArtists =
+    {} as SpotifyApi.IFavouritesArtists;
 
   searchControl = new FormControl();
   subject = new Subject<any>();
@@ -44,6 +47,7 @@ export class HomepageComponent {
     this.browseApiService.getAllCategories();
     this.browseApiService.getCategoryPlaylists('party');
     this.browseApiService.getAllFeaturedPlaylists();
+    this.spotifyServices.getUserFavouriteArtists();
 
     this.spotifyServices
       .getFeaturedPlaylists(this.initialFeaturedValue)
@@ -78,6 +82,14 @@ export class HomepageComponent {
         this.AllNewReleases.previous = res.albums.previous;
         this.AllNewReleases.next = res.albums.next;
       });
+
+    this.spotifyServices.getUserFavouriteArtists().subscribe((res: any) => {
+      this.favouritesArtists.name = res.artists.items[0].name;
+      this.favouritesArtists.genres = res.artists.items[0].genres;
+      this.favouritesArtists.image = res.artists.items[0].images[0].url;
+      this.favouritesArtists.previous = res.artists.previous;
+      this.favouritesArtists.next = res.artists.next;
+    });
   }
   getPreviousFeaturedList(value: string | null) {
     if (value !== null) {

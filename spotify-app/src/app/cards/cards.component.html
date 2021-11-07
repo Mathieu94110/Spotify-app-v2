@@ -87,4 +87,21 @@
       </div>
     </mat-card>
   </div>
+  <div *ngIf="favouritesArtists" class="cards">
+    <mat-card class="mat-elevation-z5">
+      <mat-card-title>{{ favouritesArtists.name }}</mat-card-title>
+      <img
+        mat-card-image
+        src="{{ favouritesArtists.image }}"
+        alt="Photo"
+        height="240px"
+      />
+      <div class="text-and-buttons-container">
+        <mat-card-content>
+          <p>{{ favouritesArtists.genres }}</p>
+        </mat-card-content>
+        <mat-card-actions> </mat-card-actions>
+      </div>
+    </mat-card>
+  </div>
 </div>

@@ -105,6 +105,15 @@ export namespace SpotifyApi {
     previous: string | null;
     next: string | null;
   }
+
+  export interface IFavouritesArtists {
+    name: string;
+    genres: string | string[];
+    image: string;
+    previous: string | null;
+    next: string | null;
+  }
+
   export interface ISearchHeadings {
     albums: IAlbums;
     tracks: ITracks;

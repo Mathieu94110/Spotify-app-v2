@@ -18,6 +18,9 @@ export class CardsComponent {
   @Input()
   AllNewReleases?: SpotifyApi.IAllNewReleases;
 
+  @Input()
+  favouritesArtists?: SpotifyApi.IFavouritesArtists;
+
   previous: string | null = '';
   next: string | null = '';
 

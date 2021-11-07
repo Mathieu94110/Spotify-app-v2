@@ -41,6 +41,7 @@ export class PlaylistsImagesComponent implements OnInit {
           (res: any) => {
             this.dataLoaded = true;
             this.albumsData = res.albums.items;
+            console.log(this.albumsData);
             // this.albumsUrl = res.albums.items
           },
           (err) => {
@@ -50,7 +51,12 @@ export class PlaylistsImagesComponent implements OnInit {
       });
   }
 
-  getPlaylistCoverImage(playlistId: string, id: any) {
-    this.spotifyServices.getPlaylistCoverImage(playlistId, id);
+  getPlaylistCoverImage(playlistId: string, url: string) {
+    // console.log(this.albumsData);
+    this.spotifyServices
+      .getPlaylistCoverImage(playlistId, url)
+      .subscribe((res) => {
+        console.log(res);
+      });
   }
 }
