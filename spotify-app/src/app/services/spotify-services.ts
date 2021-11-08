@@ -1,22 +1,22 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, UrlTree } from '@angular/router';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { SpotifyApi } from '../models/@types';
+import { SpotifyApi, finalSpotifyApi } from '../models/@types';
 
 @Injectable({ providedIn: 'root' })
 export class SpotifyServices {
   code: string | undefined;
   uri: string = environment.uri;
   baseURL: string = 'https://accounts.spotify.com/api/token';
-  redirect_uri: any = `${this.uri}homepage`;
+  redirect_uri: string = `${this.uri}homepage`;
   token: SpotifyApi.IToken | undefined;
   accessToken: string | undefined;
   refreshToken: string | undefined;
   newToken: string | undefined;
-  errorMessage: any;
+  errorMessage: string | undefined;
   search: string = 'https://api.spotify.com/v1/search';
   clientSecret: string = environment.clientSecret;
   authorizeUri: string = environment.authorizeUri;
@@ -34,7 +34,7 @@ export class SpotifyServices {
       scope: encodeURIComponent(this.scopes.join(' ')),
       response_type: 'code'
     });
-    window.location = <any>`${this.authorizeUri}?${params.toString()}`;
+    window.location = `${this.authorizeUri}?${params.toString()}` as any;
   }
 
   getToken() {
@@ -111,9 +111,12 @@ export class SpotifyServices {
     }
   ) {
     return this.http
-      .get<any>(`${this.browseUrl}/categories/${categoryId}/playlists`, {
-        params
-      })
+      .get<SpotifyApi.CategoryPlaylistsReponse>(
+        `${this.browseUrl}/categories/${categoryId}/playlists`,
+        {
+          params
+        }
+      )
       .pipe(
         map((res) => {
           return res.playlists;
@@ -181,7 +184,10 @@ export class SpotifyServices {
       .set('Authorization', `Bearer ${accessToken}`);
 
     this.http
-      .get<any>('https://api.spotify.com/v1/me', { headers })
+      .get<finalSpotifyApi.CurrentUsersProfileResponse>(
+        'https://api.spotify.com/v1/me',
+        { headers }
+      )
       .subscribe((res) => res);
   }
 
@@ -195,7 +201,7 @@ export class SpotifyServices {
 
     const userId = '2gwf4f6zz8ginkw7v9v3e3tmx';
 
-    return this.http.get(
+    return this.http.get<finalSpotifyApi.ListOfCurrentUsersPlaylistsResponse>(
       `https://api.spotify.com/v1/users/${userId}/playlists`,
       {
         headers
@@ -232,7 +238,7 @@ export class SpotifyServices {
     };
 
     return this.http
-      .post<any>(
+      .post<finalSpotifyApi.AddTracksToPlaylistResponse>(
         `https://api.spotify.com/v1/playlists/${playlistId}/tracks/`,
         params,
         { headers }

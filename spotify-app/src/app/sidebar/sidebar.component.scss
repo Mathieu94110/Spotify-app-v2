@@ -3,5 +3,13 @@
 }
 
 span {
+  height: 100%;
+
   padding-right: 1rem;
+}
+.side-bar-items-wrapper {
+  height: 100%;
+  > span {
+    align-items: center;
+  }
 }

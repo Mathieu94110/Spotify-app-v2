@@ -192,7 +192,7 @@ export namespace SpotifyApi {
 }
 
 ///////////////////////////////////
-declare namespace finalSpotifyApi {
+export namespace finalSpotifyApi {
   //
   // Parameter Objects for searching
   //
@@ -523,7 +523,7 @@ declare namespace finalSpotifyApi {
    * GET /v1/me
    * https://developer.spotify.com/web-api/get-current-users-profile/
    */
-  interface CurrentUsersProfileResponse extends UserObjectPrivate {}
+  export interface CurrentUsersProfileResponse extends UserObjectPrivate {}
 
   /**
    * Get User’s Followed Artists
@@ -865,7 +865,7 @@ declare namespace finalSpotifyApi {
    * GET /v1/me/playlists
    * https://developer.spotify.com/web-api/get-list-users-playlists/
    */
-  interface ListOfCurrentUsersPlaylistsResponse
+  export interface ListOfCurrentUsersPlaylistsResponse
     extends PagingObject<PlaylistObjectSimplified> {}
 
   /**
@@ -906,7 +906,8 @@ declare namespace finalSpotifyApi {
    * POST /v1/users/{user_id}/playlists/{playlist_id}/tracks
    * https://developer.spotify.com/web-api/add-tracks-to-playlist/
    */
-  interface AddTracksToPlaylistResponse extends PlaylistSnapshotResponse {}
+  export interface AddTracksToPlaylistResponse
+    extends PlaylistSnapshotResponse {}
 
   /**
    * Remove Tracks from a Playlist
@@ -1252,7 +1253,7 @@ declare namespace finalSpotifyApi {
    * Base Playlist Object. Does not in itself exist in Spotify Web Api,
    * but needs to be made since the tracks types vary in the Full and Simplified versions.
    */
-  interface PlaylistBaseObject extends ContextObject {
+  export interface PlaylistBaseObject extends ContextObject {
     /**
      * Returns `true` if context is not search and the owner allows other users to modify the playlist.
      * Otherwise returns `false`.
