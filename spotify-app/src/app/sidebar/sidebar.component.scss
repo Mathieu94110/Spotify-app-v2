@@ -2,14 +2,17 @@
   justify-content: space-between;
 }
 
-span {
-  height: 100%;
-
-  padding-right: 1rem;
-}
 .side-bar-items-wrapper {
-  height: 100%;
-  > span {
+  span {
+    height: 100%;
+    padding: 0 8px;
+    display: inline-flex;
     align-items: center;
+    text-align: center;
+  }
+  span:hover {
+    background-color: #fff;
+    cursor: pointer;
+    color: purple;
   }
 }
