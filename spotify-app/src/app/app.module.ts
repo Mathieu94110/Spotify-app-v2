@@ -38,7 +38,7 @@ import { SearchShowsComponent } from './search/search-shows/search-shows.compone
 import { SearchStepsButtonsComponent } from './search/search-steps-buttons/search-steps-buttons.component';
 import { PlaylistsImagesComponent } from './create-playlists/playlists-images/playlists-images.component';
 import { AddItemsToPlaylistsComponent } from './search/add-items-to-playlists/add-items-to-playlists.component';
-import { PopUpAddToPlaylistsComponent } from './search/add-items-to-playlists/pop-up-add-to-playlists/pop-up-add-to-playlists.component';
+import { PopUpAddToPlaylistsComponent } from './search/add-items-to-playlists/pop-up/pop-up.component';
 import { PlaylistTracksModalComponent } from './playlists/playlist-tracks-modal/playlist-tracks-modal.component';
 
 @NgModule({

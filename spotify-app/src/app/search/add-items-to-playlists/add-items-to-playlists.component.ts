@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { PopUpAddToPlaylistsComponent } from './pop-up-add-to-playlists/pop-up-add-to-playlists.component';
+import { PopUpAddToPlaylistsComponent } from './pop-up/pop-up.component';
 @Component({
   selector: 'app-add-items-to-playlists',
   templateUrl: './add-items-to-playlists.component.html',
