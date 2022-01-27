@@ -1,83 +1,66 @@
-.wrapper {
-  width: 100%;
-  height: 100%;
-  margin: auto;
-  padding: 0;
-  background-color: hsl(141, 73%, 42%);
-  display: flex;
-}
-.create-playlist-button {
-  margin: 0 !important;
-}
-.form-wrapper {
-  width: calc(100% / 3);
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-.playlist-form {
-  width: 200px;
-  height: 200px;
-  background-color: #7b1fa2;
-  border-radius: 5%;
-  color: #fff;
-}
+.myGridList {
+  height: calc(100% - 64px);
+  background-color: #1db954;
 
-.playlists {
-  width: 100%;
-  display: flex;
-
-  .example-card {
-    height: 320px;
-    max-width: 250px;
-
-    overflow-wrap: break-word;
+  .form-wrapper {
+    text-align: center;
   }
-
-  .example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-    background-size: cover;
-  }
-  mat-card {
-    margin: 20px;
-  }
-
-  mat-card-header {
-    display: block;
-    width: 100%;
-    height: 40px;
-    overflow-y: scroll;
-  }
-  mat-card-subtitle search-titles {
-    margin: 0 16px;
-    width: 100%;
-    margin: 10px 0;
-  }
-  .card-item {
-    font-weight: 600;
+  .playlist-form {
+    width: 200px;
+    height: 200px;
+    background-color: #7b1fa2;
+    border-radius: 5%;
     color: #fff;
-  }
-  .image-container {
-    display: flex;
-    justify-content: center;
-    .mat-card-image {
-      height: 200px;
-      width: auto;
-      margin: 0;
+
+    .create-playlist-button {
+      margin: 0 !important;
     }
   }
-
-  .mat-card-actions {
+  .playlist-content {
+    height: 500px;
+    width: 300px;
+    align-content: stretch;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    padding: 0;
-    margin: 0 20px;
-  }
-  .mat-button {
-    background-color: #fff;
-    color: #424242;
+    text-align: center;
+    padding: 10px;
+    background-color: #424242;
+    color: #fff;
+    border-radius: 4px;
+    box-shadow: 0px 3px 5px -1px rgb(0 0 0 / 20%),
+      0px 5px 8px 0px rgb(0 0 0 / 14%), 0px 1px 14px 0px rgb(0 0 0 / 12%);
+
+    .playlist-items-container {
+      height: auto;
+      display: flex;
+      .playlist-items {
+        width: 100px;
+        text-align: left;
+        font-size: 16px;
+        font-weight: 600;
+        color: #7b1fa2;
+      }
+      .playlist-items-value {
+        overflow-wrap: break-word;
+        width: 200px;
+        text-align: left;
+      }
+      .playlist-img {
+        width: 100%;
+        height: 200px;
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #7b1fa2;
+      }
+      .playlist-btns-container {
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+      }
+    }
   }
 }

@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-      "build:prod": "ng build --configuration production --base-href https://Mathieu94110.github.io/my_new_spotify_app/",
-  "test:headless": "ng test --watch=false --browsers=ChromeHeadless",
+    "build:prod": "ng build --configuration production --base-href https://Mathieu94110.github.io/my_new_spotify_app/",
+    "test:headless": "ng test --watch=false --browsers=ChromeHeadless",
     "test": "ng test",
     "lint": "tsc --noEmit && eslint . --ext js,ts,json --quiet --fix",
     "e2e": "ng e2e"

@@ -13,13 +13,11 @@ import { SpotifyApi } from '../models/@types';
 export class CreatePlaylistsComponent implements OnInit {
   create: boolean = false;
   playlistForm!: FormGroup;
-  name!: string;
-  description!: string;
+  name?: string;
+  description?: string;
   returnedPlaylist!: SpotifyApi.IReturnedPLaylist;
   playlistId: string | undefined;
-
   tracksItem: string[] = [];
-  playlistIsExisting: boolean = false;
 
   constructor(
     public fb: FormBuilder,
@@ -63,13 +61,6 @@ export class CreatePlaylistsComponent implements OnInit {
   createAction() {
     this.create = !this.create;
   }
-  getUserInfo() {
-    this.spotifyService.getUse();
-  }
-
-  getUserPlaylists() {
-    this.spotifyService.getUserPlaylists();
-  }
 
   setToLocalStorage() {
     let playlistsData: SpotifyApi.IReturnedPLaylist[] | null = JSON.parse(
@@ -80,7 +71,7 @@ export class CreatePlaylistsComponent implements OnInit {
     localStorage.setItem('entry', JSON.stringify(this.returnedPlaylist));
 
     const playlistnotExist = !playlistsData.some(
-      (p) => p.id === this.returnedPlaylist!.id
+      (p) => p.id === this.returnedPlaylist?.id
     );
 
     playlistnotExist

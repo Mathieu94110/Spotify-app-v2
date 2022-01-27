@@ -1,18 +1,18 @@
 .navbar {
   justify-content: space-between;
-}
-
-.side-bar-items-wrapper {
-  span {
+  .side-bar-items-wrapper {
     height: 100%;
-    padding: 0 8px;
-    display: inline-flex;
-    align-items: center;
-    text-align: center;
-  }
-  span:hover {
-    background-color: #fff;
-    cursor: pointer;
-    color: purple;
+    span {
+      height: 100%;
+      padding: 0 8px;
+      display: inline-flex;
+      align-items: center;
+      text-align: center;
+    }
+    span:hover {
+      background-color: #fff;
+      cursor: pointer;
+      color: purple;
+    }
   }
 }
